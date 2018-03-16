@@ -12,15 +12,9 @@ var path = require('path')
 gulp.task('css', function(){
     return gulp.src(
             [
-                './public/css/architect-styles.css',
-                './public/css/fonts.css',
-                './public/css/style.css',
-                './public/css/sub-page-styles.css',
-                './public/css/architect-styles.css',
-                './public/css/artist-styles.css',
-                './public/css/design-studio.css',
-                './public/css/interior-design-styles.css',
-                './public/css/photography-styles.css'
+                './public/css/core.min.css',
+                './public/css/thesaas.min.css',
+                './public/css/style.css'
             ]
         )
         .pipe(minifyCSS())
@@ -36,14 +30,23 @@ gulp.task('copy-fonts', function(){
         .pipe(gulp.dest('./public/dist/fonts/'))
 })
 
+gulp.task('imgs', function(){
+    return gulp.src(
+            ['./public/img/**']
+        )
+        .pipe(gulp.dest('./public/dist/img/'))
+})
+
 gulp.task('style', ['css', 'copy-fonts'], function(){})
 
 
 gulp.task('js', function(){
     return gulp.src(
-            [
-                './public/js/main.js',
-                './public/js/scripts.js'
+            [   
+                './public/js/core.min.js',
+                './public/js/thesaas.min.js',
+                './public/js/script.js',
+                './public/js/dropzone.js'
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
