@@ -1,7 +1,7 @@
-var webpack = require('webpack')
-var path = require('path')
+var webpack 			  = require('webpack')
+var path 			      = require('path')
 var UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
-var config = require('./package.json')
+var config 				  = require('./package.json')
 
 module.exports = {
 	entry: {
