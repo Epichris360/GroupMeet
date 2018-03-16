@@ -12,15 +12,15 @@ var path = require('path')
 gulp.task('css', function(){
     return gulp.src(
             [
-                './public/css/bootstrap.css',
+                './public/css/architect-styles.css',
+                './public/css/fonts.css',
                 './public/css/style.css',
-                './public/css/swiper.css',
-                './public/css/dark.css',
-                './public/css/font-icons.css',
-                './public/css/animate.css',
-                './public/css/magnific-popup.css',
-                './public/css/responsive.css',
-                './public/css/custom.css'
+                './public/css/sub-page-styles.css',
+                './public/css/architect-styles.css',
+                './public/css/artist-styles.css',
+                './public/css/design-studio.css',
+                './public/css/interior-design-styles.css',
+                './public/css/photography-styles.css'
             ]
         )
         .pipe(minifyCSS())
@@ -31,9 +31,9 @@ gulp.task('css', function(){
 
 gulp.task('copy-fonts', function(){
     return gulp.src(
-            ['./public/css/fonts/**']
+            ['./public/fonts/**']
         )
-        .pipe(gulp.dest('./public/dist/css/fonts/'))
+        .pipe(gulp.dest('./public/dist/fonts/'))
 })
 
 gulp.task('style', ['css', 'copy-fonts'], function(){})
@@ -42,10 +42,8 @@ gulp.task('style', ['css', 'copy-fonts'], function(){})
 gulp.task('js', function(){
     return gulp.src(
             [
-                './public/js/jquery.js',
-                './public/js/plugins.js',
-                './public/js/functions.js',
-                './public/js/custom.js'
+                './public/js/main.js',
+                './public/js/scripts.js'
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
