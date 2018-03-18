@@ -27,7 +27,7 @@ const signInPost = (req, res) => {
             email: data.email, loggedIn: true,
             notloggedIn:false, 
         }
-        res.redirect("/",{ vertexSession })
+        res.redirect( "/")
         return
     })
     .catch(err => {
@@ -44,7 +44,7 @@ const signUpGet = (req, res) => {
         req.vertexSession = functions.blankVertexSession() 
     }
     const vertexSession = req.vertexSession
-    res.render('user/SignUp', { vertexSession })
+    res.render( 'user/SignUp', { vertexSession })
     return
 }
 
@@ -63,12 +63,15 @@ const signUpPost = (req, res) => {
             email: data.email, loggedIn: true,
             notloggedIn:false, 
         }
-        res.redirect("/", { vertexSession })
+        res.redirect( "/")
         return        
     })
     .catch(err => {
         req.vertexSession.msg = { show: true, text: err.message , type:'danger' }
-        res.redirect('back')
+        //res.redirect(500, 'back')
+        res.status(500).json({
+            err: err.message
+        })
         return
     })
 }
@@ -79,7 +82,7 @@ const signOut = (req, res) => {
     req.vertexSession.msg  = { show: false, text:'', type:'' }
     
     const vertexSession = req.vertexSession
-    res.redirect("/", { vertexSession })
+    res.redirect( "/")
     return
 }
 

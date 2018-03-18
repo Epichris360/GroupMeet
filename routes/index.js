@@ -10,6 +10,4 @@ const staticController = require('../controllers/staticController')
 	information, view here: https://mustache.github.io/#demo */
 router.get('/', staticController.index )
 
-
-
 module.exports = router
