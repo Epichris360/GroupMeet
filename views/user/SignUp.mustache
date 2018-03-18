@@ -1,1 +1,108 @@
-<h1>Sign Up</h1>
+{{>headNoNav}}
+
+    <body class="mh-fullscreen bg-img center-vh p-20" style="background-image: url(https://lh3.googleusercontent.com/idiZBjpAT92SsHRGBSg5sAKgSA6kd71K3_Wl2FTjL1ASzsSuj-i1rTRNd-AGHvU9A8mXXxSmcMUFTkuMBYKL225pdQ);" >
+
+        <div class="card card-shadowed p-50 w-400 mb-0" style="max-width: 100%">
+                
+            <div class="alert alert-danger" id="warningAlert" role="alert" style="display: none;" >
+                <strong id="strongAlert" >Please Check Your Password</strong> <span id="spanAlert" ></span>
+
+                <button type="button" id="closeAlert" class="close" 
+                    data-dismiss="alert" aria-label="Close"
+                >
+                    <span>×</span>
+                </button>
+            </div>
+
+            <h5 class="text-uppercase text-center">Register</h5>
+            <br><br>
+      
+            <form class="form-type-material" id="submit" action="/signup" method="POST" >
+              <div class="form-group">
+                <input type="text"
+                    id="username"
+                    class="form-control" name="username" placeholder="Username" required >
+              </div>
+      
+              <div class="form-group">
+                <input type="email" 
+                    id="email"
+                    class="form-control" name="email" placeholder="Email address" required>
+              </div>
+      
+              <div class="form-group">
+                <input 
+                    id="password"
+                    type="password" class="form-control" name="password" placeholder="Password" required>
+              </div>
+      
+              <div class="form-group">
+                <input 
+                    id="passwordConfirm"
+                    type="password" class="form-control" name="passwordConfirm" placeholder="Password (confirm)" required>
+              </div>
+      
+              <div class="form-group">
+                <label class="custom-control custom-checkbox">
+                  <input type="checkbox" class="custom-control-input" id="checked" >
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">I agree to all <a class="text-primary" href="#">terms</a></span>
+                </label>
+              </div>
+      
+              <br>
+              <button class="btn btn-bold btn-block btn-primary" type="submit">Sign Up!</button>
+            </form>
+      
+            <hr class="w-30">
+      
+            <p class="text-center text-muted fs-13 mt-20">Already have an account? <a href="/signin">Sign in</a></p>
+        </div>
+
+        <!-- js from this point on -->
+        {{>scripts}}
+
+        <script type="text/javascript" >
+
+            $(function(){
+
+                $('#submit').on('submit',function(event){
+                    
+
+                    const password    = $("#password").val()
+                    const passConfirm = $("#passwordConfirm").val()
+                    const checked     = document.getElementById("checked").checked 
+
+                    if( password != passConfirm && !checked ){
+                        $("#strongAlert").text("Check your password & Agreement")
+                        $("#spanAlert").text("Passwords don't match and You Haven't checked the agreement")
+                        $("#warningAlert").show()
+                        event.preventDefault() ;
+                    }
+                    else if( password != passConfirm ){
+                        $("#strongAlert").text("Check your password")
+                        $("#spanAlert").text("They don't match")
+                        $("#warningAlert").show()
+                        event.preventDefault() ;
+                    }
+                    else if( !checked ){
+                        $("#strongAlert").text("Please Check The Agreement")
+                        $("#spanAlert").text("Or else you can't continue")
+                        $("#warningAlert").show()
+                        event.preventDefault() ;
+                    }
+                });
+
+                $("#closeAlert").on('click', function(event){
+                    $("#strongAlert").text("")
+                    $("#spanAlert").text("")
+                    $("#warningAlert").hide()
+                })
+
+                
+
+            });
+        </script>
+
+    </body>
+</html>
