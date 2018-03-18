@@ -3,12 +3,20 @@ const collections = require('../collections')
 const constants = require('../constants') 
 
 const signInGet = (req, res) => {
-    res.render('user/SignIn')
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    res.render('user/SignIn',{ vertexSession })
     return
 }
 
 const signInPost = (req, res) => {
     const credentials = { username: req.body.username, password: req.body.password }
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
     turbo.login(credentials)
     .then(data => {
         //const canEdit = (data.role != constants.customer.seller || data.role != constants.customer.buyer)
@@ -18,8 +26,7 @@ const signInPost = (req, res) => {
             email: data.email, loggedIn: true,
             notloggedIn:false, 
         }
-
-        res.redirect("/")
+        res.redirect("/",{ vertexSession })
         return
     })
     .catch(err => {
@@ -32,7 +39,11 @@ const signInPost = (req, res) => {
 }
 
 const signUpGet = (req, res) => {
-    res.render('user/SignUp')
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    res.render('user/SignUp', { vertexSession })
     return
 }
 
@@ -40,13 +51,14 @@ const signUpPost = (req, res) => {
     // post request that creates a new user
     const body    = req.body
     const newUser = { username: body.username, email: body.email, password: body.password, role: 'regular' }
-
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
     turbo.createUser(newUser)
     .then(data => {
         req.vertexSession.user = data
-        const user = data
-        turbo.create( collections.cart , cart )
-        res.redirect("/")
+        res.redirect("/", { vertexSession })
         return        
     })
     .catch(err => {
@@ -60,7 +72,9 @@ const signOut = (req, res) => {
     //resets all session data
     req.vertexSession.user = { id: '', username: '', email:'', loggedIn: false, notloggedIn: true, role:'' } // canEdit:false,
     req.vertexSession.msg  = { show: false, text:'', type:'' }
-    res.redirect("/")
+    
+    const vertexSession = req.vertexSession
+    res.redirect("/", { vertexSession })
     return
 }
 
