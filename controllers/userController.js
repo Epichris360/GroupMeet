@@ -1,6 +1,7 @@
-const turbo     = require('turbo360')({site_id: process.env.TURBO_APP_ID})
+const turbo       = require('turbo360')({site_id: process.env.TURBO_APP_ID})
 const collections = require('../collections')
-const constants = require('../constants') 
+const constants   = require('../constants') 
+const functions   = require('../functions')
 
 const signInGet = (req, res) => {
     if(  req.vertexSession == null || req.vertexSession.user == null ){ 
@@ -57,7 +58,11 @@ const signUpPost = (req, res) => {
     const vertexSession = req.vertexSession
     turbo.createUser(newUser)
     .then(data => {
-        req.vertexSession.user = data
+        req.vertexSession.user = { id: data.id, username: data.username, 
+            firstName: data.firstName, lastName: data.lastName, role: data.role,
+            email: data.email, loggedIn: true,
+            notloggedIn:false, 
+        }
         res.redirect("/", { vertexSession })
         return        
     })

@@ -35,8 +35,13 @@
 
         <div class="topbar-right">
           <ul class="topbar-nav nav">
+            {{#vertexSession.user.notloggedIn}}
             <li class="nav-item"><a class="nav-link" href="/user/signup">Sign Up</a></li>
             <li class="nav-item"><a class="nav-link" href="/user/signin">Sign In</a></li>
+            {{/vertexSession.user.notloggedIn}}
+            {{#vertexSession.user.loggedIn}}
+            <li class="nav-item"><a class="nav-link" href="/user/signout">Sign Ou</a></li>
+            {{/vertexSession.user.loggedIn}}
 
             <li class="nav-item">
               <a class="nav-link" href="#">Doc <i class="fa fa-caret-down"></i></a>
