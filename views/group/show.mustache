@@ -1,1 +1,58 @@
-<h1>Show here</h1>
+{{>head}}
+
+
+<body>
+    {{>nav}}
+    <!-- Header -->
+    <header class="header header-inverse bg-fixed" style="background-image: url( {{group.imgUrl}} )" data-overlay="8">
+        <div class="container text-center">
+
+            <div class="row">
+                <div class="col-12 col-lg-8 offset-lg-2">
+
+                    <h1>{{group.name}}</h1>
+                    <p class="fs-20 opacity-70">Join Us!</p>
+
+                </div>
+            </div>
+    
+        </div>
+    </header>
+    <!-- END Header -->
+
+    <main class="main-content">
+        <section class="section bb-1">
+            <div class="container">
+            
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <img src="{{group.imgUrl}}" style="height:auto; width:auto;" >
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <h1 >{{group.name}}</h1>
+
+                        <button class="btn btn-outline btn-success">Join!</button>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+                        <h5>Description</h5>
+                        {{#description}}
+                            <p>{{.}}</p>
+                        {{/description}}
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+                        <h5>Up Coming Meetings</h5>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+{{>footer}}

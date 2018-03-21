@@ -12,7 +12,7 @@ const createGet = (req, res) => {
 const createPost = (req, res) => {
     //create slug
     const body         = req.body
-    const imgUrl       = body.image
+    const imgUrl       = body.image // have default img in case of no img uploaded
     const name         = body.name
     const description  = body.description
     const shortDescrip = description.substring(0,120) + '...'
@@ -49,9 +49,21 @@ const editPost = (req, res) => {
 }
 
 const show = (req, res) => {
+    const slug          = req.params.slug
     const vertexSession = req.vertexSession
-    res.render("group/show", { vertexSession })
-    return
+    turbo.fetch( collections.groups, { slug })
+    .then(groups => {
+        description = groups[0].description.split("\n")
+        res.render("group/show", { vertexSession, group: groups[0], description })
+        return
+    })
+    .catch(err => {
+        res.status(200).json({
+            // create 404 page
+            err: err.message
+        })
+        return
+    })
 }
 
 const list = (req, res) => {
