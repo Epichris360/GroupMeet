@@ -14,7 +14,7 @@ gulp.task('css', function(){
             [
                 './public/css/core.min.css',
                 './public/css/thesaas.min.css',
-                './public/css/style.css'
+                './public/css/style.css',
             ]
         )
         .pipe(minifyCSS())
@@ -46,7 +46,8 @@ gulp.task('js', function(){
                 './public/js/core.min.js',
                 './public/js/thesaas.min.js',
                 './public/js/script.js',
-                './public/js/dropzone.js'
+                './public/js/dropzone.js',
+                './public/js/app.js'
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
