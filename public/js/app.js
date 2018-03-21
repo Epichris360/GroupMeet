@@ -26,6 +26,7 @@ $(function(){
             }
 
             $("#imagesInput").val(data.result.url)
+            $("#groupImg").attr('src', data.result.url)
             swal(
                 'Awesome!',
                 'The Image was Uploaded!!!!',

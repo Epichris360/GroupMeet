@@ -39,9 +39,20 @@ const createPost = (req, res) => {
 }
 
 const editGet = (req, res) => {
+    const slug          = req.params.slug
     const vertexSession = req.vertexSession
-    res.render("group/edit", { vertexSession })
-    return
+    turbo.fetch( collections.groups, { slug })
+    .then(groups => {
+        res.render("group/edit", { vertexSession, group: groups[0] })
+        return
+    })
+    .catch(err => {
+        res.status(200).json({
+            // create 404 page
+            err: err.message
+        })
+        return
+    })
 }
 
 const editPost = (req, res) => {

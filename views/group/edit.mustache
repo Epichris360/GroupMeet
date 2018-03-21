@@ -1,1 +1,83 @@
-<h1>Edit goes here!</h1>
+{{>head}}
+{{>nav}}
+<body class="thesaas-sections-split">
+
+        <header class="header header-inverse bg-fixed" style="background-image: url(https://lh3.googleusercontent.com/a_A54CaTScdJIND5HClRjX1xiSv8jjsm4zzoey39cvH8rHmoqiSoqWmt0jGV9SUv9heTtRhGzPNdhZ11Y5lwqY91Zg)" data-overlay="8">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+                        <h1>Update the Groups Info!!</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+    <!-- END Header -->
+
+    <!-- Main container -->
+    <main class="main-content">
+        <section class="section">
+            <div class="container">
+                {{>alerts}}
+                <header class="section-header">
+                    <h2>Fill out The Form To Create It!</h2>
+                </header>
+                    <form action="/group/edit-{{group.slug}}" method="POST" >
+                        <div class="container">
+                            <div class="row gap-y">
+                                        
+                                <div class="col-12 col-lg-4">
+                                    <div class="form-group">
+                                        <label>Name?:</label>
+                                        <input class="form-control form-control-sm" required
+                                            type="text" placeholder="Name?" name="name"
+                                            value="group.name"
+                                        >
+                                    </div>
+                                    <label>Group Image:</label>
+                                    <img id="groupImg" src="{{group.imgUrl}}" >
+                            
+                                </div>
+                            
+                                <div class="col-12 col-lg-8">
+                                    <div class="form-group">
+                                        <label>Description?:</label>
+                                        <textarea class="form-control"
+                                            name="description" required
+                                            rows="7"  placeholder="Your message"
+                                        >
+                                        {{group.description}}
+                                        </textarea>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" id="imagesInput" name="image" value="{{group.imgUrl}}" >
+
+                                <div class="col-12 col-lg-6 uploader-class">
+                                    <button id="btn-file-select"
+                                        class="btn btn-outline btn-primary pic-upload" 
+                                    >Group Profile Picture</button>
+
+                                    
+                                    <h1 id="finished" >Done....</h1>
+                                </div>
+
+                                <div class="col-12 col-lg-6 uploader-class">
+                                    <button type="submit" 
+                                        id="submit"
+                                        class="btn btn-outline btn-success pull-right" 
+                                    >Update!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+    </main>
+    <!-- END Main container -->
+<script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
+<!-- sweet alert -->
+  <script type="text/javascript" 
+                src="https://unpkg.com/sweetalert2@7.0.9/dist/sweetalert2.all.js" ></script>
+{{>footer}}
