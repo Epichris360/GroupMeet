@@ -35,6 +35,10 @@ const list = (req, res) => {
     return
 }
 
+const myGroups = (req, res) => {
+
+}
+
 module.exports = {
-    createGet, createPost, editGet, editPost, show, list
+    createGet, createPost, editGet, editPost, show, list, myGroups
 }
