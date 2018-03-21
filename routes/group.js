@@ -8,20 +8,22 @@ const groupController = require('../controllers/groupController')
 
 /*  This is a sample API route. */
 
-router.get("/create",      groupController.createGet  )
+router.get("/create",      groupController.createGet    )
 
-router.post("/create",     groupController.createPost )
+router.post("/create",     groupController.createPost   )
 
-router.get("/edit-:slug",  groupController.editGet    )
+router.get("/edit-:slug",  groupController.editGet      )
 
-router.post("/edit-:slug", groupController.editPost   )
+router.post("/edit-:slug", groupController.editPost     )
 
-router.get("/show-:slug",  groupController.show       )
+router.get("/show-:slug",  groupController.show         )
 
 // general list of groups. Will be react page with map/search etc
-router.get("/",           groupController.list        )
+router.get("/",           groupController.list          )
 
 // groups the user has joined
-router.get("/my-groups",  groupController.myGroups    )
+router.get("/my-groups",  groupController.myGroups      )
+
+router.get("/joinedGroups", groupController.joinedGroups)
 
 module.exports = router

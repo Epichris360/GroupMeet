@@ -10,7 +10,7 @@ const createGet = (req, res) => {
 }
 
 const createPost = (req, res) => {
-
+    //create slug
 }
 
 const editGet = (req, res) => {
@@ -30,17 +30,26 @@ const show = (req, res) => {
 }
 
 const list = (req, res) => {
+    // discovery of groups. this part will include react for maps, search etc
     const vertexSession = req.vertexSession
     res.render("group/list", { vertexSession })
     return
 }
 
 const myGroups = (req, res) => {
+    // groups person has created and manages
     const vertexSession = req.vertexSession
     res.render("group/myGroups", { vertexSession })
     return
 }
 
+const joinedGroups = (req, res) => {
+    // groups that the person has joined list
+    const vertexSession = req.vertexSession
+    res.render("group/joinedGroups", {vertexSession})
+    return
+}
+
 module.exports = {
-    createGet, createPost, editGet, editPost, show, list, myGroups
+    createGet, createPost, editGet, editPost, show, list, myGroups, joinedGroups
 }

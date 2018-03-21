@@ -1,0 +1,46 @@
+
+    <!-- Topbar -->
+    <nav class="topbar topbar-inverse topbar-expand-md topbar-sticky">
+      <div class="container">
+        
+        <div class="topbar-left">
+          <button class="topbar-toggler">&#9776;</button>
+          <a class="topbar-brand" href="/">
+            <img class="logo-default" src="/dist/img/logo.png" alt="logo">
+            <img class="logo-inverse" src="/dist/img/logo-light.png" alt="logo">
+          </a>
+        </div>
+
+
+        <div class="topbar-right">
+          <ul class="topbar-nav nav">
+            {{#vertexSession.user.notloggedIn}}
+            <li class="nav-item"><a class="nav-link" href="/user/signup">Sign Up</a></li>
+            <li class="nav-item"><a class="nav-link" href="/user/signin">Sign In</a></li>
+            {{/vertexSession.user.notloggedIn}}
+            {{#vertexSession.user.loggedIn}}
+            <li class="nav-item"><a class="nav-link" href="/user/signout">Sign Out</a></li>
+            {{/vertexSession.user.loggedIn}}
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Groups <i class="fa fa-caret-down"></i></a>
+              <div class="nav-submenu align-right">
+                <a class="nav-link" href="/group">Discovery</a>
+                {{#vertexSession.user.loggedIn}}
+                <a class="nav-link" href="/group/joinedGroups">Groups I Joined</a>
+                <a class="nav-link" href="/group/my-groups">Groups I Manage</a>
+                <a class="nav-link" href="/group/create">Create My Own Group</a>
+                {{/vertexSession.user.loggedIn}}
+              </div>
+            </li>
+
+          </ul>
+        </div>
+
+      </div>
+    </nav>
+    <!-- END Topbar -->
+
+
+
+    
