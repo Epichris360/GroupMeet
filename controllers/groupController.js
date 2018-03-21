@@ -11,6 +11,31 @@ const createGet = (req, res) => {
 
 const createPost = (req, res) => {
     //create slug
+    const body         = req.body
+    const imgUrl       = body.image
+    const name         = body.name
+    const description  = body.description
+    const shortDescrip = description.substring(0,120) + '...'
+    const slug         = functions.slugGen(name)
+
+    const newGroup = {
+        imgUrl, name, description, shortDescrip, slug
+    }
+
+    turbo.create( collections.groups, newGroup )
+    .then(group => {
+        res.status(200).json({
+            group
+        })
+        return
+    })
+    .catch(err => {
+        //create universal partial for errors
+        res.status(500).json({
+            err: err.message
+        })
+        return
+    })
 }
 
 const editGet = (req, res) => {

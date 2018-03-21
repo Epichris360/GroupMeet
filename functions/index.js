@@ -193,6 +193,11 @@ const reviewEditPerUser = (reviews, user) => {
     return reviews
 }
 
+const slugGen = (name) => {
+    const newName = name.split(' ').join("+") + '-' + randomString( 5 )
+    return newName
+}
+
 module.exports = {
 
     shuffleArray:         shuffleArray,
@@ -210,7 +215,8 @@ module.exports = {
     randTicket:           randTicket,
     blankVertexSession:   blankVertexSession,
     starVal:              starVal,
-    reviewEditPerUser:    reviewEditPerUser
+    reviewEditPerUser:    reviewEditPerUser,
+    slugGen:              slugGen
 }
 
   
