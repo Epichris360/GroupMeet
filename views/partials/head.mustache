@@ -44,14 +44,13 @@
             {{/vertexSession.user.loggedIn}}
 
             <li class="nav-item">
-              <a class="nav-link" href="#">Doc <i class="fa fa-caret-down"></i></a>
+              <a class="nav-link" href="#">Groups <i class="fa fa-caret-down"></i></a>
               <div class="nav-submenu align-right">
-                <a class="nav-link" href="doc-element.html">Elements</a>
-                <a class="nav-link" href="doc-component.html">Components</a>
-                <a class="nav-link" href="doc-section.html">Sections</a>
-                <a class="nav-link" href="doc-card.html">Cards</a>
-                <a class="nav-link" href="doc-typography.html">Typography</a>
-                <a class="nav-link" href="doc-utility.html">Utility Classes</a>
+                <a class="nav-link" href="/group">Discover</a>
+                {{#vertexSession.user.loggedIn}}
+                <a class="nav-link" href="/group/my-groups">My Groups</a>
+                <a class="nav-link" href="/group/create">Create Your Own Group</a>
+                {{/vertexSession.user.loggedIn}}
               </div>
             </li>
 

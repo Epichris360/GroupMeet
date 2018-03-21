@@ -36,7 +36,9 @@ const list = (req, res) => {
 }
 
 const myGroups = (req, res) => {
-
+    const vertexSession = req.vertexSession
+    res.render("group/myGroups", { vertexSession })
+    return
 }
 
 module.exports = {
