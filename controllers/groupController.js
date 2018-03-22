@@ -55,8 +55,22 @@ const editGet = (req, res) => {
     })
 }
 
-const editPost = (req, res) => {
-
+const editPost = (req, res) => { 
+    const body = req.body
+    const updatedGroup = {
+        name: body.name, description: body.description, imgUrl: body.image,
+    }
+    turbo.updateEntity( collections.groups, body.groupId, updatedGroup )
+    .then(update => {
+       res.redirect("/group/show-" + update.slug)
+       return
+    })
+    .catch(err => {
+        res.status(200).json({
+            err: err.status
+        })
+        return
+    })
 }
 
 const show = (req, res) => {
