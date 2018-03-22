@@ -26,7 +26,7 @@ const createPost = (req, res) => {
     const user         = req.vertexSession.user
 
     const newGroup = {
-        imgUrl, name, description, shortDescrip, slug, creator_id: user.id
+        imgUrl, name, description, shortDescrip, slug, owner_id: user.id
     }
 
     turbo.create( collections.groups, newGroup )
@@ -140,7 +140,7 @@ const myGroups = (req, res) => {
     const vertexSession = req.vertexSession
     const user = vertexSession.user
     functions.isAuth(user, res)
-    
+
     res.render("group/myGroups", { vertexSession })
     return
 }
@@ -159,5 +159,5 @@ const joinedGroups = (req, res) => {
 }
 
 module.exports = {
-    createGet, createPost, editGet, editPost, show, list, myGroups, joinedGroups
+    createGet, createPost, editGet, editPost, show, list, myGroups, joinedGroups, 
 }
