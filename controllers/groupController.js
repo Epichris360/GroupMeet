@@ -120,7 +120,7 @@ const list = (req, res) => {
         const pgLinks   = functions.pgLinks(pageData.length, page)
 
         res.render("group/list", { vertexSession, groups: pageData[page], pgLinks,
-            imgBg: constants.genericBg[3].imgUrl })
+            imgBg: constants.genericBg[1].imgUrl })
         return
 
     })
@@ -134,15 +134,36 @@ const list = (req, res) => {
 
 const myGroups = (req, res) => {
     // groups person has created and manages
+    // for pagination
+    let page
+    if( typeof req.query.page == "undefined" || parseInt( req.query.page ) == 1 ){
+        page = 0
+    }else{
+        page = parseInt( req.query.page ) 
+    }
+    // if user obj doesnt exist in sesssions, then a blank one will be added to it
     if(  req.vertexSession == null || req.vertexSession.user == null ){ 
         req.vertexSession = functions.blankVertexSession() 
     }
     const vertexSession = req.vertexSession
     const user = vertexSession.user
     functions.isAuth(user, res)
+    const imgBg = constants.genericBg[2].imgUrl
 
-    res.render("group/myGroups", { vertexSession })
-    return
+    turbo.fetch( collections.groups, null )
+    .then(data => {
+        const pageData  = functions.paginationArrays(data, 12)
+        const pgLinks   = functions.pgLinks(pageData.length, page)
+
+        res.render("group/myGroups", { vertexSession, imgBg, groups: pageData[page], pgLinks, })
+        return
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err.message
+        })
+        return
+    })
 }
 
 const joinedGroups = (req, res) => {

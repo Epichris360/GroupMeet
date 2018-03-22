@@ -1,1 +1,60 @@
-<h1>My Groups that i created</h1>
+{{>head}}
+
+<body>
+    {{>nav}}
+        <!-- Header -->
+        <header class="header header-inverse bg-fixed" style="background-image: url({{imgBg}})" data-overlay="8">
+            <div class="container text-center">
+
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+
+                        <h1>Manage Your Groups!</h1>
+                        <p class="fs-20 opacity-70">Remember to Set Up an Event!<br />For The Weekend!</p>
+ 
+                    </div> 
+                </div>
+
+            </div>
+        </header>
+        <!-- END Header -->
+    <main class="main-content">
+
+        <section class="section">
+            <div class="container">
+
+                <div class="row gap-y">
+            
+                {{#groups}}
+                    <div class="col-12 col-md-3 col-lx-12">
+                        <div class="shop-item">
+                        <a href="/group/show-{{slug}}">
+                            <div class="item-details">
+                                <div>
+                                    <h3>{{name}}</h3>
+                                </div>
+
+                            </div>
+                            <img src="{{imgUrl}}" alt="group profile pic">
+                        </a>
+                        </div>
+                    </div>
+                {{/groups}}
+           
+                </div>
+
+            </div>
+        </section>
+
+
+        <div style="padding:15px" >
+            <a class="btn btn-white {{pgLinks.backward.class}}" href="/group?page={{pgLinks.backward.num}}" ><i class="ti-arrow-left fs-9 mr-4"></i> Backwards</a>
+
+            <a class="btn btn-white {{pgLinks.forward.class}} pull-right" href="/group?page={{pgLinks.forward.num}}">Forwards <i class="ti-arrow-right fs-9 ml-4"></i></a>
+        </div>
+
+    </main>
+    <!-- END Main container -->
+
+
+{{>footer}}
