@@ -39,7 +39,6 @@ const paginationArrays = (arr, chunkSize) => {
 }
 
 const pgLinks = (num, activePg) => {
-    activePg++
     
     let paginationLinks = {}
     if( num > activePg && (activePg - 1) > 0 ){

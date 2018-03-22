@@ -91,12 +91,23 @@ const show = (req, res) => {
 }
 
 const list = (req, res) => {
+    let page
+    if( typeof req.query.page == "undefined" || parseInt( req.query.page ) == 1 ){
+        page = 0
+    }else{
+        page = parseInt( req.query.page ) 
+    }
     // discovery of groups. this part will include react for maps, search etc
     const vertexSession = req.vertexSession
     turbo.fetch(collections.groups, null)
     .then(data => {
-        res.render("group/list", { vertexSession, groups: data })
+        const pageData  = functions.paginationArrays(data, 12)
+        const pgLinks   = functions.pgLinks(pageData.length, page)
+
+        res.render("group/list", { vertexSession, groups: pageData[page], pgLinks,
+            imgBg: constants.genericBg[3].imgUrl })
         return
+
     })
     .catch(err => {
         res.status(500).json({
