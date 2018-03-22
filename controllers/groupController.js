@@ -4,7 +4,14 @@ const constants   = require('../constants')
 const functions   = require('../functions')
 
 const createGet = (req, res) => {
+
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
     const vertexSession = req.vertexSession
+    const user          = vertexSession.user
+    functions.isAuth(user, res)
+
     res.render("group/create", { vertexSession })
     return
 }
@@ -16,9 +23,10 @@ const createPost = (req, res) => {
     const description  = body.description
     const shortDescrip = description.substring(0,120) + '...'
     const slug         = functions.slugGen(name)
+    const user         = req.vertexSession.user
 
     const newGroup = {
-        imgUrl, name, description, shortDescrip, slug
+        imgUrl, name, description, shortDescrip, slug, creator_id: user.id
     }
 
     turbo.create( collections.groups, newGroup )
@@ -39,7 +47,14 @@ const createPost = (req, res) => {
 
 const editGet = (req, res) => {
     const slug          = req.params.slug
+    
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
     const vertexSession = req.vertexSession
+    const user          = vertexSession.user
+    functions.isAuth(user, res)
+
     turbo.fetch( collections.groups, { slug })
     .then(groups => {
         res.render("group/edit", { vertexSession, group: groups[0] })
@@ -119,14 +134,26 @@ const list = (req, res) => {
 
 const myGroups = (req, res) => {
     // groups person has created and manages
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
     const vertexSession = req.vertexSession
+    const user = vertexSession.user
+    functions.isAuth(user, res)
+    
     res.render("group/myGroups", { vertexSession })
     return
 }
 
 const joinedGroups = (req, res) => {
     // groups that the person has joined list
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
     const vertexSession = req.vertexSession
+    const user = vertexSession.user
+    functions.isAuth(user, res)
+
     res.render("group/joinedGroups", {vertexSession})
     return
 }
