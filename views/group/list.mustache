@@ -1,1 +1,14 @@
-<h1>react goes here. maps and stuff</h1>
+{{>head}}
+
+<body>
+    {{>nav}}
+	<div id="root"></div> 
+	
+    <h1>Maps</h1>
+
+	<!-- Turbo library imports: jQuery, Turbo CDN, sample app.js -->
+	<script type="text/javascript" src="/dist/js/vendor.min.js"></script>
+	<script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
+	<script type="text/javascript" src="/dist/bundle/commons.js"></script>
+	<script type="text/javascript" src="/dist/bundle/app.js"></script> <!-- React code bundle -->
+{{>footer}}

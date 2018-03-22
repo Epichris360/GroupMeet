@@ -10,9 +10,8 @@ const createGet = (req, res) => {
 }
 
 const createPost = (req, res) => {
-    //create slug
     const body         = req.body
-    const imgUrl       = body.image // have default img in case of no img uploaded
+    const imgUrl       = body.image.length > 0 ? body.image : constants.defaultImgGroup 
     const name         = body.name
     const description  = body.description
     const shortDescrip = description.substring(0,120) + '...'
@@ -94,8 +93,17 @@ const show = (req, res) => {
 const list = (req, res) => {
     // discovery of groups. this part will include react for maps, search etc
     const vertexSession = req.vertexSession
-    res.render("group/list", { vertexSession })
-    return
+    turbo.fetch(collections.groups, null)
+    .then(data => {
+        res.render("group/list", { vertexSession, groups: data })
+        return
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err.message
+        })
+        return
+    })
 }
 
 const myGroups = (req, res) => {
