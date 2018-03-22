@@ -1,0 +1,9 @@
+* User setup
+    - SignUp - Done
+    - SignIn - Done
+    - SignOut - Done
+    - routing for this - done
+
+*CRUD for group: List, Read etc then myGroups(ones created and managing) and joinedGroups
+    - Create: Done, Show: Done, Edit: DONE, List: DONE
+    - default img for groups if no img uploaded: DONE
