@@ -93,7 +93,8 @@ const show = (req, res) => {
     turbo.fetch( collections.groups, { slug })
     .then(groups => {
         description = groups[0].description.split("\n")
-        res.render("group/show", { vertexSession, group: groups[0], description })
+        const canEdit = groups[0].owner_id == vertexSession.user.id
+        res.render("group/show", { vertexSession, group: groups[0], description, canEdit })
         return
     })
     .catch(err => {

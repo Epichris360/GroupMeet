@@ -32,6 +32,10 @@
                         <h1 >{{group.name}}</h1>
 
                         <button class="btn btn-outline btn-success">Join!</button>
+
+                        {{#canEdit}}
+                            <button class="btn btn-outline btn-warning">New Event</button>
+                        {{/canEdit}}
                     </div>
                 </div>
 
