@@ -1,0 +1,21 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script type="text/javascript">
+    const config = {
+        dateFormat: "m/d/Y",
+        "disable": [
+            function(date) {
+                // return true to disable
+                const today = new Date()
+                return ( date.getMonth() < today.getMonth() ||
+                    date.getFullYear() < today.getFullYear() || 
+                    date.getDate() < today.getDate() && date.getMonth() == today.getMonth() )
+            }
+        ],
+        "locale": {
+            "firstDayOfWeek": 1 // start week on Monday
+        }
+    }
+    $('.pickr-date').flatpickr(config)
+</script>

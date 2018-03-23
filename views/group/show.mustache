@@ -33,8 +33,8 @@
 
                         <button class="btn btn-outline btn-success">Join!</button>
 
-                        {{#canEdit}}
-                            <button class="btn btn-outline btn-warning">New Event</button>
+                        {{#canEdit}} 
+                            <button class="btn btn-outline btn-warning" data-toggle="modal" data-target="#EventModal" >New Event</button>
                         {{/canEdit}}
                     </div>
                 </div>
@@ -56,6 +56,9 @@
                     </div>
                 </div>
             </div>
+
+            {{>experiment}}
+
         </section>
     </main>
 
