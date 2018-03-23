@@ -9,11 +9,13 @@ const index = require('./routes/index')
 const api   = require('./routes/api'  )
 const user  = require('./routes/user' ) 
 const group = require('./routes/group')
+const event = require('./routes/event')
 
 // set routes
-app.use('/',     index)
-app.use('/api',  api  ) // sample API Routes
-app.use('/user', user )
-app.use('/group',group)
+app.use('/',      index)
+app.use('/api',   api  ) // sample API Routes
+app.use('/user',  user )
+app.use('/group', group)
+app.use('/event', event)
 
 module.exports = app
