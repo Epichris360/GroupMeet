@@ -63,7 +63,7 @@ const signUpPost = (req, res) => {
             email: data.email, loggedIn: true,
             notloggedIn:false, 
         }
-        res.redirect( "/")
+        res.redirect( "back")
         return        
     })
     .catch(err => {

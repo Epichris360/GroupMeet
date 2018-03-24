@@ -4,7 +4,10 @@ const constants   = require('../constants')
 const functions   = require('../functions')
 
 const createPost = (req, res) => {
-
+    res.status(200).json({
+        hi:"hi"
+    })
+    return
 }
 
 module.exports = {

@@ -4,13 +4,13 @@
         <div class="container">
             <!-- Modal -->
             <div class="modal fade" id="EventModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
+                <form action="/event/create" method="POST"  class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">Create A New Event!</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
-                            </button>
+                            </button> 
                         </div>
                         <div class="modal-body">
                             <label>Name Of the Event:</label>
@@ -30,13 +30,19 @@
 
                             <br />
                             <label>Image For The Event:</label>
-                            <button class="btn btn-primary" >Update!</button>
+                            <img src="{{imgBg}}" id="groupImg" >
+                            <input type="hidden" id="imagesInput" name="image" value="{{group.imgUrl}}" >
+                            <input type="hidden" name="groupId" value="{{group.id}}"> 
+                            <br /><br />
+                            <button class="btn btn-primary pic-upload"  >Upload An Img!</button>
+                            <h2 id="finished" >Image Was Uploaded!</h2>
                         </div> 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-success">Create!</button>
+                        
+                        <input type="submit" class="btn btn-success" value="Create" name="Create" >
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </section>

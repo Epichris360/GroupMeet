@@ -89,12 +89,15 @@ const editPost = (req, res) => {
 
 const show = (req, res) => {
     const slug          = req.params.slug
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
     const vertexSession = req.vertexSession
     turbo.fetch( collections.groups, { slug })
     .then(groups => {
         description = groups[0].description.split("\n")
         const canEdit = groups[0].owner_id == vertexSession.user.id
-        res.render("group/show", { vertexSession, group: groups[0], description, canEdit })
+        res.render("group/show", { vertexSession, group: groups[0], description, canEdit, imgBg: constants.genericBg[1].imgUrl })
         return
     })
     .catch(err => {
