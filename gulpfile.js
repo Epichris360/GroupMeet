@@ -15,7 +15,8 @@ gulp.task('css', function(){
                 './public/css/core.min.css',
                 './public/css/thesaas.min.css',
                 './public/css/style.css',
-                './public/css/jquery.timepicker.min.css'
+                './public/css/jquery.timepicker.min.css',
+                './public/css/flatpickr.min.css'
             ]
         )
         .pipe(minifyCSS())
@@ -49,7 +50,8 @@ gulp.task('js', function(){
                 './public/js/script.js',
                 './public/js/dropzone.js',
                 './public/js/app.js',
-                './public/js/jquery.timepicker.min.js'
+                './public/js/jquery.timepicker.min.js',
+                './public/js/flatpickr.min.js'
             ]
         )
         .pipe(gp_concat('vendor.min.js'))

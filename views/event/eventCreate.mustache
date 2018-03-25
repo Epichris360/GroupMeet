@@ -12,7 +12,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button> 
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body"> 
                             <label>Name Of the Event:</label>
                             <input type="text" name="name" class="form-control" >
                             <label>Description of The Event:</label>
@@ -28,14 +28,13 @@
                             <label>End Time:</label>
                             <input type="text" class="form-control timePickr"  id="endTime" name="endTime" >
 
+                            <label>Address:</label>
+                            <input type="text" class="form-control"  id="address" name="address" >
+
                             <br />
-                            <label>Image For The Event:</label>
-                            <img src="{{imgBg}}" id="groupImg" >
-                            <input type="hidden" id="imagesInput" name="image" value="{{group.imgUrl}}" >
                             <input type="hidden" name="groupId" value="{{group.id}}"> 
-                            <br /><br />
-                            <button class="btn btn-primary pic-upload"  >Upload An Img!</button>
-                            <h2 id="finished" >Image Was Uploaded!</h2>
+
+                            <input type="hidden" id="imagesInput" name="image" value="{{group.imgUrl}}" >
                         </div> 
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary pull-left" data-dismiss="modal">Close</button>
@@ -47,3 +46,5 @@
         </div>
     </section>
 </main>
+
+

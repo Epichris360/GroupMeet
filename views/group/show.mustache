@@ -15,7 +15,7 @@
 
                 </div>
             </div>
-    
+     
         </div>
     </header>
     <!-- END Header -->
@@ -56,10 +56,13 @@
                     </div>
                 </div>
             </div>
-
-            {{>eventCreate}}
+            
+            {{#canEdit}}
+                {{>eventCreate}}
+            {{/canEdit}}
 
         </section>
     </main>
+ 
 
 {{>footer}}

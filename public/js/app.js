@@ -6,7 +6,7 @@ $(function(){
 
     $('#btn-file-select').click(function(event){
         event.preventDefault()
-        turbo.uploadFile(function(err, data){
+        turbo.uploadFile(function(err, data){ 
             if (err){
                 swal(
                     'Oops...',
