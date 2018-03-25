@@ -46,17 +46,13 @@
 
     <!-- Scripts -->
     <script src="/dist/js/vendor.min.js"></script>
-
     {{>flatpickr}}
-
     <script type="text/javascript" >
       // sets up timepickr
       $('.timePickr').timepicker();
+
+      google.maps.event.addDomListener(window, 'load', initAutocomplete);
     </script>
-
-
-   
-
   </body>
 </html>
  
