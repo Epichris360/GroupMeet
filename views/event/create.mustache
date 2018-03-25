@@ -1,0 +1,87 @@
+{{>head}}
+{{>nav}}
+<body class="thesaas-sections-split">
+
+        <header class="header header-inverse bg-fixed" style="background-image: url(https://lh3.googleusercontent.com/a_A54CaTScdJIND5HClRjX1xiSv8jjsm4zzoey39cvH8rHmoqiSoqWmt0jGV9SUv9heTtRhGzPNdhZ11Y5lwqY91Zg)" data-overlay="8">
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-12 col-lg-8 offset-lg-2">
+                        <h1>Create a New Group!</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+    <!-- END Header -->
+
+    <!-- Main container -->
+    <main class="main-content">
+        <section class="section">
+            <div class="container">
+                {{>alerts}}
+                <header class="section-header">
+                    <h2>Fill out The Form To Create It!</h2>
+                </header>
+                    <form action="/event/create-{{group.slug}}" method="POST" >
+                        <div class="container">
+                            <div class="row gap-y">
+                                        
+                                <div class="col-12 col-md-4 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Name?:</label>
+                                        <input class="form-control form-control-sm" required
+                                            type="text" placeholder="Name?" name="name"
+                                        >
+                                    </div>
+
+                                    <label>Date:</label>
+                                    <input type="text" class="form-control pickr-date" data-lang="en" 
+                                            data-large-mode="true" data-large-default="true" id="startTime" 
+                                            name="date" placeholder="Date?"
+                                    >
+                                    <label>Start Time:</label>
+                                    <input type="text" class="form-control timePickr" placeholder="Start Time?"
+                                        id="startTime" name="startTime" >
+
+                                    <label>End Time:</label>
+                                    <input type="text" class="form-control timePickr" placeholder="End Time?"
+                                    id="endTime" name="endTime" >
+
+                                    <input type="hidden" name="groupID" value={{group.id}} >
+                            
+                                </div>
+                            
+                                <div class="col-12 col-md-8 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Description?:</label>
+                                        <textarea class="form-control"
+                                            name="description" required
+                                            rows="7"  placeholder="Your message"
+                                        ></textarea>
+                                    </div>
+                                </div>
+                                
+                                <div  class="col-12 col-md-12 col-sm-12" style="height:400px;" >
+                                    <input type="hidden" id="mapaddress" name="mapaddress">
+ 
+                                    <input id="pac-input" class="controls" type="text" placeholder="Search Box">
+                                    <div id="map" style="height:100%; width:100%;" ></div>
+                                </div>
+
+
+
+                                <div class="col-12 col-lg-6 uploader-class">
+                                    <button type="submit" 
+                                        id="submit"
+                                        class="btn btn-outline btn-success pull-right" 
+                                    >Create!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </section>
+    </main>
+    
+{{>footer}}

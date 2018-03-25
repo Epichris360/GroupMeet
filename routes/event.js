@@ -6,8 +6,8 @@ const router = vertex.router()
 /* controllers */
 const eventController = require('../controllers/eventController')
 
-
-router.post('/create', eventController.createPost )
+router.get("/create-:group_slug",  eventController.createGet  )
+router.post('/create-:group_slug', eventController.createPost )
 
 
 module.exports = router

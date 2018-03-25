@@ -34,7 +34,7 @@
                         <button class="btn btn-outline btn-success">Join!</button>
 
                         {{#canEdit}} 
-                            <button class="btn btn-outline btn-warning" data-toggle="modal" data-target="#EventModal" >New Event</button>
+                            <a class="btn btn-outline btn-warning" href="/event/create-{{group.slug}}" >New Event</a>
                         {{/canEdit}}
                     </div>
                 </div>
@@ -53,8 +53,6 @@
                 <div class="row">
                     <div class="col-12 col-lg-8 offset-lg-2">
                         <h5>Up Coming Meetings</h5>
-                        <input id="pac-input" class="controls" type="text" placeholder="Search Box">
-                        <div id="map"></div>
                     </div>
                 </div>
             </div>
