@@ -30,19 +30,23 @@ const createGet = (req, res) => {
 
 const createPost = (req, res) => {
     const group_slug = req.params.group_slug
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    const user          = vertexSession.user
+    functions.isAuth(user, res)
+
     const body       = req.body
     const groupId    = body.groupId
     const newEvent   = {
         name: body.name, description: body.description, date: body.date, startTime: body.startTime,
         endTime: body.endTime,  mapAddress: body.mapaddress, group_id: body.groupID
     }
-    res.status(200).json({
-        newEvent,
-        body
-    })
+    
     turbo.create( collections.events, newEvent )
     .then(event => {
-        res.redirect('/group/show-'+ group_slug)
+        res.redirect( '/group/show-' + group_slug )
         return
     })
     .catch(err => {
@@ -53,6 +57,46 @@ const createPost = (req, res) => {
     })
 }
 
+const editGet = (req, res) => {
+    const group_slug = req.params.group_slug
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    const user          = vertexSession.user
+
+    functions.isAuth(user, res)
+    turbo.fetch( collections.events, { slug: group_slug } )
+    .then(data => {
+        res.render('event/edit',{ vertexSession, group: data[0] } )
+        return
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err.message
+        })
+        return
+    })
+
+}
+
+const editPost = (req, res) => {
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    const user          = vertexSession.user
+    functions.isAuth(user, res)
+
+    const body = req.body
+
+    res.status(200).json({
+        body
+    })
+    return
+
+}
+
 module.exports = {
-    createPost, createGet
+    createPost, createGet, editGet, editPost
 }
