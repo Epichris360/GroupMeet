@@ -17,7 +17,7 @@ const createGet = (req, res) => {
     turbo.fetch( collections.groups, { slug: group_slug } )
     .then(data => {
         res.render('event/create', { vertexSession, gmaps: true, group: data[0],
-             bgImg: constants.genericBg[3].imgUrl })
+            bgImg: constants.genericBg[3].imgUrl })
         return
     })
     .catch(err => {
@@ -39,9 +39,11 @@ const createPost = (req, res) => {
 
     const body       = req.body
     const groupId    = body.groupId
+    
     const newEvent   = {
         name: body.name, description: body.description, date: body.date, startTime: body.startTime,
-        endTime: body.endTime,  mapAddress: body.mapaddress, group_id: body.groupID
+        endTime: body.endTime,  mapAddress: body.mapaddress, group_id: body.groupID, 
+        created_at: new Date().toString(), updated_at: new Date().toString()
     }
     
     turbo.create( collections.events, newEvent )

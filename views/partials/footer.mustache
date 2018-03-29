@@ -54,6 +54,11 @@
 
       $(document).ready(function() {
         google.maps.event.addDomListener(window, 'load', initAutocomplete);
+        $('#map').fadeIn(2000, function() {
+
+            // Trigger a map resize
+            google.maps.event.trigger(map, 'resize');
+        });
       });
     </script>
   </body>
