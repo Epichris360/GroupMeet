@@ -39,11 +39,13 @@ const createPost = (req, res) => {
 
     const body       = req.body
     const groupId    = body.groupId
+    const event_slug = functions.slugGen(body.name)
     
     const newEvent   = {
         name: body.name, description: body.description, date: body.date, startTime: body.startTime,
         endTime: body.endTime,  mapAddress: body.mapaddress, group_id: body.groupID, 
-        created_at: new Date().toString(), updated_at: new Date().toString()
+        created_at: new Date().toString(), updated_at: new Date().toString(),
+        event_slug: event_slug
     }
     
     turbo.create( collections.events, newEvent )

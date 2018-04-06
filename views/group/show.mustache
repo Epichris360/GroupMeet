@@ -53,6 +53,38 @@
                 <div class="row">
                     <div class="col-12 col-lg-8 offset-lg-2">
                         <h5>Up Coming Meetings</h5>
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name:</th>
+                                    <th>Date:</th>
+                                    <th>Show:</th>
+                                    {{#canEdit}}
+                                    <th>Edit:</th>
+                                    <th>Delete:</th>
+                                    {{/canEdit}}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#events}}
+                                <tr>
+                                    <td>{{name}}</td>
+                                    <td>{{date}}</td>
+                                    <td>
+                                        <a href="/event/show-{{event_slug}}" class="btn btn-round btn-success">Show</a>
+                                    </td>
+                                    {{#canEdit}}
+                                    <td>
+                                        <a href="/event/edit-{{event_slug}}" class="btn btn-round btn-warning">Edit</a>
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-round btn-danger">Delete</a>
+                                    </td>
+                                    {{/canEdit}}
+                                </tr>
+                                {{/events}}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

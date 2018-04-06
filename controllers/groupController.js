@@ -95,10 +95,19 @@ const show = (req, res) => {
     const vertexSession = req.vertexSession
     turbo.fetch( collections.groups, { slug })
     .then(groups => {
-        description = groups[0].description.split("\n")
-        const canEdit = groups[0].owner_id == vertexSession.user.id
-        res.render("group/show", { vertexSession, group: groups[0], description, canEdit, imgBg: constants.genericBg[1].imgUrl })
-        return
+        return groups[0]
+    })
+    .then(group => {
+        turbo.fetch( collections.events, { group_id: group.id } )
+            .then(events => {
+                description = group.description.split("\n")
+            const canEdit = group.owner_id == vertexSession.user.id
+            res.render("group/show", { vertexSession, group: group, description, 
+                canEdit, imgBg: constants.genericBg[1].imgUrl, events: events
+            })
+            return
+        })
+
     })
     .catch(err => {
         res.status(200).json({
