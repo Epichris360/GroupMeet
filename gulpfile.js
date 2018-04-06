@@ -40,7 +40,7 @@ gulp.task('imgs', function(){
         .pipe(gulp.dest('./public/dist/img/'))
 })
 
-gulp.task('style', ['css', 'copy-fonts'], function(){})
+gulp.task('style', ['css', 'copy-fonts', 'imgs'], function(){})
 
 
 gulp.task('js', function(){
