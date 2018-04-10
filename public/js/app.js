@@ -38,4 +38,10 @@ $(function(){
         })
     })
 
+
+    $(".toggleModal").on('click', function(e){
+        console.log('event data: ', JSON.parse( $(this).attr('data-JSONstr') ) )
+        return
+    })
+
 })

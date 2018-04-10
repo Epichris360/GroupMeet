@@ -101,10 +101,13 @@ const show = (req, res) => {
         turbo.fetch( collections.events, { group_id: group.id } )
             .then(events => {
                 description = group.description.split("\n")
-            const canEdit = group.owner_id == vertexSession.user.id
-            res.render("group/show", { vertexSession, group: group, description, 
-                canEdit, imgBg: constants.genericBg[1].imgUrl, events: events
-            })
+                const canEdit = group.owner_id == vertexSession.user.id
+                for( let x = 0; x < events.length; x++ ){
+                    events[x].JSONstr = JSON.stringify(events[x])
+                }
+                res.render("group/show", { vertexSession, group: group, description, 
+                    canEdit, imgBg: constants.genericBg[1].imgUrl, events: events
+                })
             return
         })
 
