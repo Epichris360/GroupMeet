@@ -101,6 +101,29 @@ const editPost = (req, res) => {
 
 }
 
+const show = (req, res) => {
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession  = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    const event_slug    = req.params.event_slug
+
+    turbo.fetch( collections.events, { event_slug } )
+    .then(event => {
+        res.status(200).json({
+            event
+        })
+        return
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err.message
+        })
+        return
+    })
+
+}
+
 module.exports = {
-    createPost, createGet, editGet, editPost
+    createPost, createGet, editGet, editPost, show
 }
