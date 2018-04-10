@@ -103,8 +103,17 @@ const show = (req, res) => {
                 description = group.description.split("\n")
                 const canEdit = group.owner_id == vertexSession.user.id
                 for( let x = 0; x < events.length; x++ ){
-                    events[x].JSONstr = JSON.stringify(events[x])
+                    const address = JSON.parse( events[0].mapAddress )
+                    events[x].JSONstr = JSON.stringify({
+                        name: events[x].name, description: events[x].description,
+                        address: address.formatted_address, 
+                        date: events[x].date, startTime: events[x].startTime,
+                        endTime: events[x].endTime
+                    })
                 }
+                /*res.status(200).json({
+                    events
+                })*/
                 res.render("group/show", { vertexSession, group: group, description, 
                     canEdit, imgBg: constants.genericBg[1].imgUrl, events: events
                 })

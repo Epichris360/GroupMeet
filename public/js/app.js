@@ -38,10 +38,19 @@ $(function(){
         })
     })
 
+})
 
+
+$(function(){
     $(".toggleModal").on('click', function(e){
-        console.log('event data: ', JSON.parse( $(this).attr('data-JSONstr') ) )
+        var event = JSON.parse( $(this).attr('data-jsonstr') )
+        console.log('event: ',event)
+        $("#modalEventName"     ).text(event.name       )
+        $("#modalEventDesc"     ).text(event.description)
+        $("#modalEventDate"     ).text(event.date       )
+        $("#modalEventStartTime").text(event.startTime  )
+        $("#modalEventEndTime"  ).text(event.endTime    )
+        $("#modalEventAddress"  ).text(event.address    )
         return
     })
-
 })
