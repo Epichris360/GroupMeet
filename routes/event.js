@@ -9,7 +9,7 @@ const eventController = require('../controllers/eventController')
 router.get("/create-:group_slug",  eventController.createGet  )
 router.post('/create-:group_slug', eventController.createPost )
 
-router.get('/edit-:group_slug',    eventController.editGet    )
+router.get('/edit-:event_slug',    eventController.editGet    )
 router.post('/edit-:event_slug',   eventController.editPost   )
 
 router.get('/show-:event_slug',    eventController.show       )

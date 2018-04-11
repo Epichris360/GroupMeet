@@ -62,7 +62,7 @@ const createPost = (req, res) => {
 }
 
 const editGet = (req, res) => {
-    const group_slug = req.params.group_slug
+    const event_slug = req.params.event_slug
     if(  req.vertexSession == null || req.vertexSession.user == null ){ 
         req.vertexSession = functions.blankVertexSession() 
     }
@@ -70,9 +70,13 @@ const editGet = (req, res) => {
     const user          = vertexSession.user
 
     functions.isAuth(user, res)
-    turbo.fetch( collections.events, { slug: group_slug } )
+    turbo.fetch( collections.events, { event_slug } )
     .then(data => {
-        res.render('event/edit',{ vertexSession, group: data[0] } )
+        mapAddress = JSON.parse( data[0].mapAddress )
+        res.render('event/edit',{ vertexSession, group: data[0], 
+            latLong: JSON.stringify(mapAddress.geometry.location), 
+            bgImg: constants.genericBg[4].imgUrl 
+        })
         return
     })
     .catch(err => {

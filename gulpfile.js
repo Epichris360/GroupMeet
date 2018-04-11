@@ -53,7 +53,8 @@ gulp.task('js', function(){
                 './public/js/app.js',
                 './public/js/jquery.timepicker.min.js',
                 './public/js/flatpickr.min.js',
-                './public/js/gmaps.js'
+                './public/js/gmaps.js',
+                './public/js/gmapsEditing.js'
             ]
         )
         .pipe(gp_concat('vendor.min.js'))

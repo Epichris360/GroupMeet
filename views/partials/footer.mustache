@@ -53,7 +53,11 @@
       $('.timePickr').timepicker();
 
       $(document).ready(function() {
-        google.maps.event.addDomListener(window, 'load', initAutocomplete);
+        if( $("#eventEditing").val() ==  "true" ){
+          google.maps.event.addDomListener(window, 'load', initAutocompleteEdit)
+        }else{
+          google.maps.event.addDomListener(window, 'load', initAutocomplete    )
+        }
         $('#map').fadeIn(2000, function() {
 
             // Trigger a map resize
