@@ -7,11 +7,16 @@
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 function initAutocompleteEdit() {
-    var latLong = JSON.stringify( $("#latLong").val() )
+    var latLong = JSON.parse( $("#latLong").val() )
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: latLong.lat, lng: latLong.lng},
       zoom: 13,
       mapTypeId: 'roadmap'
+    });
+    var marker = new google.maps.Marker({
+      position: latLong,
+      map: map,
+      title: 'Hello World!'
     });
   
     // Create the search box and link it to the UI element.
@@ -24,7 +29,7 @@ function initAutocompleteEdit() {
       searchBox.setBounds(map.getBounds());
     });
   
-    var markers = [];
+    //var markers = [];
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
