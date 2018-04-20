@@ -74,17 +74,21 @@
                                         <!-- <a href="/event/show-{{event_slug}}" class="btn btn-round btn-success">Show</a> --> 
                                         <button class="btn btn-round btn-success toggleModal" 
                                             data-toggle="modal" data-target="#showEventModal"
-                                            data-jsonstr='{{JSONstr}}'
+                                            data-jsonstr="{{JSONstr}}"
                                         >
                                             Show
                                         </button>
-                                    </td>
+                                    </td> 
                                     {{#canEdit}}
                                     <td>
                                         <a href="/event/edit-{{event_slug}}" class="btn btn-round btn-warning">Edit</a>
                                     </td>
                                     <td>
-                                        <a href="#" class="btn btn-round btn-danger">Delete</a>
+                                        <button class="btn btn-round btn-danger deleteEvent" 
+                                            data-event-slug={{event_slug}}
+                                        >
+                                            Delete
+                                        </button>
                                     </td>
                                     {{/canEdit}}
                                 </tr>

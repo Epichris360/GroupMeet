@@ -58,10 +58,11 @@ gulp.task('js', function(){
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
+        .pipe(to5())
         .pipe(gulp.dest('./public/dist/js/'))
         .pipe(gp_rename('vendor.min.js'))
         .pipe(gp_uglify())
-        .pipe(gulp.dest('./public/dist/js/'))
+        .pipe(gulp.dest('./public/dist/js/')) 
 });
 
 gulp.task('es6-es5', ['js'], function(){

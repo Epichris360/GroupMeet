@@ -100,27 +100,35 @@ const show = (req, res) => {
     .then(group => {
         turbo.fetch( collections.events, { group_id: group.id } )
             .then(events => {
-
-                description = group.description.split("\n")
+                // splits the description into an array of paragraphs
+                const description = group.description.split("\n")
+                // is use to tell if the current user is the owner of the group
+                // therefore given update, and delete capabilities
                 const canEdit = group.owner_id == vertexSession.user.id
+                // events that will happen in the future
+                let eventsFuture = []
                 for( let x = 0; x < events.length; x++ ){
 
-                    if( events[x].date < new Date() ){
+                    const yesterdaysDate = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+                    if( new Date( events[x].date ) >= yesterdaysDate ){
 
-                        const address = JSON.parse( events[0].mapAddress )
+                        const address = JSON.parse( events[x].mapAddress )
                         events[x].JSONstr = JSON.stringify({
                             name: events[x].name, description: events[x].description,
                             address: address.formatted_address, 
                             date: events[x].date, startTime: events[x].startTime,
                             endTime: events[x].endTime
                         })
-
+                        eventsFuture.push( events[x] )
                     }
 
                 }
                 res.render("group/show", { vertexSession, group: group, description, 
-                    canEdit, imgBg: constants.genericBg[1].imgUrl, events: events
+                    canEdit, imgBg: constants.genericBg[1].imgUrl, events: eventsFuture
                 })
+                /*res.status(200).json({
+                    events
+                })*/
                 
             return
         })

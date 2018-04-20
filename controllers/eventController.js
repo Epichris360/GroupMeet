@@ -127,6 +127,14 @@ const show = (req, res) => {
     })
 }
 
+const deleted = (req, res) => {
+    console.log('it works!!')
+    res.status(500).json({
+        hi: "hi"
+    })
+    return
+}
+
 module.exports = {
-    createPost, createGet, editGet, editPost, show
+    createPost, createGet, editGet, editPost, show, deleted
 }
