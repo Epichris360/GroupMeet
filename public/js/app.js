@@ -48,7 +48,4 @@ $(function(){
         $("#modalEventAddress"  ).text(event.address    )
         return
     }) 
-
-    
-
 })
