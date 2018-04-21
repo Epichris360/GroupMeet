@@ -17,7 +17,8 @@ gulp.task('css', function(){
                 './public/css/style.css',
                 './public/css/jquery.timepicker.min.css',
                 './public/css/flatpickr.min.css',
-                './public/css/gmaps.css'
+                './public/css/gmaps.css',
+                './public/css/alertify.min.css'
             ]
         )
         .pipe(minifyCSS())
@@ -54,12 +55,14 @@ gulp.task('js', function(){
                 './public/js/jquery.timepicker.min.js',
                 './public/js/flatpickr.min.js',
                 './public/js/gmaps.js',
-                './public/js/gmapsEditing.js'
+                './public/js/gmapsEditing.js',
+                './public/js/alertify.min.js'
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
         .pipe(gulp.dest('./public/dist/js/'))
         .pipe(gp_rename('vendor.min.js'))
+        .pipe(to5())
         .pipe(gp_uglify())
         .pipe(gulp.dest('./public/dist/js/')) 
 });
