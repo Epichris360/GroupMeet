@@ -128,9 +128,24 @@ const show = (req, res) => {
 }
 
 const deleted = (req, res) => {
-    console.log('it works!!')
+    const eventID = req.body.eventID
+    /*turbo.removeEntity( collections.events, eventID )
+    .then(data => {
+        console.log('data: ',data)
+        res.status(200).json({
+            result: data
+        })
+        return
+    })
+    .catch(err => {
+        res.status(500).json({
+            message: err.message
+        })
+        return
+    })
+    return*/
     res.status(500).json({
-        hi: "hi"
+        message: "there was an error!"
     })
     return
 }

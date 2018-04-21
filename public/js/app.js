@@ -49,14 +49,38 @@ $(function(){
         return
     }) 
 
-    $('.deleteEvent').on('click', function(){
-        alertify.confirm("This is a confirm dialog.",
+    
+})
+
+$(document).ready(function() {
+    $(".deleteEvent").on('click', function(){
+        var eventID    = $(this).attr('data-event')
+        alertify.confirm("Are You Sure About This? Deletions Are Permenent",
         function(){
-            alertify.success('Ok')
+            $.ajax({
+                url: "/event/delete",
+                type: "POST",
+                data: { eventID: eventID },
+                success: function (res) {            
+                    alertify.success('<h5>The Event Was Deleted!!!</h5>') 
+                    setInterval(function(){
+                        location.reload()
+                    }, 2000);
+
+                    return
+                },
+                error: function(err) {
+                   alertify.error('<h5>There Was An Error. Please Try Again</h5>')
+                   console.log('err: ',err.responseJSON.message )
+                   return
+                }
+            })
         },
         function(){
-            alertify.error('Cancel')
+            alertify.error('<h3>Canceled</h3>')
         })
         return
+        
     })
 })
+

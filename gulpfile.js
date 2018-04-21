@@ -62,7 +62,6 @@ gulp.task('js', function(){
         .pipe(gp_concat('vendor.min.js'))
         .pipe(gulp.dest('./public/dist/js/'))
         .pipe(gp_rename('vendor.min.js'))
-        .pipe(to5())
         .pipe(gp_uglify())
         .pipe(gulp.dest('./public/dist/js/')) 
 });

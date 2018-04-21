@@ -14,6 +14,7 @@ router.post('/edit-:event_slug',   eventController.editPost   )
 
 router.get('/show-:event_slug',    eventController.show       )
 
-router.post('/delete-:event_slug', eventController.deleted    )
+router.post('/delete',             eventController.deleted    )
 
 module.exports = router
+ 
