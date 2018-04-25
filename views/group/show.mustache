@@ -30,14 +30,15 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <h1 >{{group.name}}</h1>
-
+                        {{#notOwner}}
                         <button class="btn btn-outline btn-success">Join!</button>
+                        {{/notOwner}}
 
                         {{#canEdit}} 
                             <a class="btn btn-outline btn-warning" href="/event/create-{{group.slug}}" >New Event</a>
                         {{/canEdit}}
                     </div>
-                </div>
+                </div> 
 
                 <hr>
 

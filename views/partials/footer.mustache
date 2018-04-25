@@ -46,24 +46,6 @@
     <!-- Scripts -->
     <script type="text/javascript" src="https://cdn.turbo360-dev.com/dist/turbo.min.js"></script>
     <script type="text/javascript" src="/dist/js/vendor.min.js"></script>
-    {{>flatpickr}}
-    <script type="text/javascript" >
-      // sets up timepickr
-        $('.timePickr').timepicker();
-
-        $(document).ready(function() {
-            if( $("#eventEditing").val() ==  "true" ){
-                initAutocompleteEdit()
-            }else{
-                initAutocomplete()
-            }
-            $('#map').fadeIn(2000, function() {
-                // Trigger a map resize
-                google.maps.event.trigger(map, 'resize');
-            })
-        })
-
-    </script>
   </body>
 </html>
  

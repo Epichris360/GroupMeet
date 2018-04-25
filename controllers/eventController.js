@@ -129,9 +129,8 @@ const show = (req, res) => {
 
 const deleted = (req, res) => {
     const eventID = req.body.eventID
-    /*turbo.removeEntity( collections.events, eventID )
+    turbo.removeEntity( collections.events, eventID )
     .then(data => {
-        console.log('data: ',data)
         res.status(200).json({
             result: data
         })
@@ -143,11 +142,6 @@ const deleted = (req, res) => {
         })
         return
     })
-    return*/
-    res.status(500).json({
-        message: "there was an error!"
-    })
-    return
 }
 
 module.exports = {

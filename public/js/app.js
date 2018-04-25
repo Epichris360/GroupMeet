@@ -70,8 +70,7 @@ $(document).ready(function() {
                     return
                 },
                 error: function(err) {
-                   alertify.error('<h5>There Was An Error. Please Try Again</h5>')
-                   console.log('err: ',err.responseJSON.message )
+                   alertify.error('<h5>There Was An Error.'+ err.responseJSON.message +'</h5>')
                    return
                 }
             })

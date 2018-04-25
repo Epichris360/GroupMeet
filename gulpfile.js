@@ -56,7 +56,8 @@ gulp.task('js', function(){
                 './public/js/flatpickr.min.js',
                 './public/js/gmaps.js',
                 './public/js/gmapsEditing.js',
-                './public/js/alertify.min.js'
+                './public/js/alertify.min.js',
+                './public/js/mapsTimeAndDatePickr.js',
             ]
         )
         .pipe(gp_concat('vendor.min.js'))
