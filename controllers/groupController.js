@@ -115,7 +115,7 @@ const show = (req, res) => {
 
                     events[x].JSONstr = JSON.stringify({
                         name: events[x].name, description: events[x].description,
-                        address: event[x].mapAddress.formatted_address, 
+                        address: events[x].mapAddress.formattedAddress, 
                         date: events[x].date, startTime: events[x].startTime,
                         endTime: events[x].endTime
                     })

@@ -46,7 +46,7 @@ const createPost = (req, res) => {
         endTime: body.endTime,  mapAddress: JSON.parse( body.mapaddress), group_id: body.groupID, 
         created_at: new Date().toString(), updated_at: new Date().toString(),
         event_slug: event_slug
-    }
+    } 
     
     turbo.create( collections.events, newEvent )
     .then(event => {
@@ -95,13 +95,31 @@ const editPost = (req, res) => {
     const user          = vertexSession.user 
     functions.isAuth(user, res)
 
-    const body = req.body
+    const body    = req.body
+    const eventID = body.eventID
 
-    res.status(200).json({
-        body
+    const updatedEvent = {
+        name: body.name, description: body.description, date: body.date, startTime: body.startTime,
+        endTime: body.endTime,  mapAddress: JSON.parse( body.mapaddress ),
+        updated_at: new Date().toString()
+    }
+    turbo.updateEntity( collections.events, eventID, updatedEvent )
+    .then(result => {
+        return result
     })
-    return
-
+    .then(event => {
+        turbo.fetchOne( collections.groups, event.group_id )
+        .then(data => {
+            res.redirect( '/group/show-' + data.slug )
+            return
+        })
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err.message
+        })
+        return
+    })
 }
 
 const show = (req, res) => {
