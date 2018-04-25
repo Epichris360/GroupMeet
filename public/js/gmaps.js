@@ -33,7 +33,9 @@ function initAutocomplete() {
       if (places.length == 0) {
         return;
       }
-      $("#mapaddress").val( JSON.stringify( places[0] ) )
+      var addressData = { latLng: places[0].geometry.location, formattedAddress: places[0].formatted_address }
+      $("#mapaddress").val( JSON.stringify( addressData ) )
+      console.log('mapaddress: ', $("#mapaddress").val() )
       // Clear out the old markers.
       markers.forEach(function(marker) {
         marker.setMap(null);

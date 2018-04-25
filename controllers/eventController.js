@@ -43,7 +43,7 @@ const createPost = (req, res) => {
     
     const newEvent   = {
         name: body.name, description: body.description, date: body.date, startTime: body.startTime,
-        endTime: body.endTime,  mapAddress: body.mapaddress, group_id: body.groupID, 
+        endTime: body.endTime,  mapAddress: JSON.parse( body.mapaddress), group_id: body.groupID, 
         created_at: new Date().toString(), updated_at: new Date().toString(),
         event_slug: event_slug
     }
@@ -71,10 +71,9 @@ const editGet = (req, res) => {
 
     functions.isAuth(user, res)
     turbo.fetch( collections.events, { event_slug } )
-    .then(data => {
-        mapAddress = JSON.parse( data[0].mapAddress )
-        res.render('event/edit',{ vertexSession, group: data[0], 
-            latLong: JSON.stringify(mapAddress.geometry.location), 
+    .then(data => { 
+        res.render('event/edit',{ vertexSession, event: data[0], 
+            latLong: JSON.stringify( data[0].mapAddress.latLng ) ,
             bgImg: constants.genericBg[4].imgUrl 
         })
         return
@@ -93,7 +92,7 @@ const editPost = (req, res) => {
         req.vertexSession = functions.blankVertexSession() 
     }
     const vertexSession = req.vertexSession
-    const user          = vertexSession.user
+    const user          = vertexSession.user 
     functions.isAuth(user, res)
 
     const body = req.body

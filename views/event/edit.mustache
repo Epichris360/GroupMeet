@@ -21,7 +21,7 @@
                 <header class="section-header">
                     <h2>Fill out The Form To Create It!</h2>
                 </header>
-                    <form action="/event/edit-{{group.slug}}" method="POST" >
+                    <form action="/event/edit-{{event.event_slug}}" method="POST" >
                         <div class="container">
                             <div class="row gap-y">
                                         
@@ -29,27 +29,26 @@
                                     <div class="form-group">
                                         <label>Name?:</label>
                                         <input class="form-control form-control-sm" required
-                                            type="text" placeholder="Name?" name="name" value='{{group.name}}'
+                                            type="text" placeholder="Name?" name="name" value='{{event.name}}'
                                         >
                                     </div>
 
                                     <label>Date:</label>
                                     <input type="text" class="form-control pickr-date" data-lang="en" 
                                             data-large-mode="true" data-large-default="true" id="startTime" 
-                                            name="date" placeholder="Date?" value="{{group.date}}"
+                                            name="date" placeholder="Date?" value="{{event.date}}"
                                     >
                                     <label>Start Time:</label>
                                     <input type="text" class="form-control timePickr" placeholder="Start Time?"
-                                        id="startTime" name="startTime" value="{{group.startTime}}" >
+                                        id="startTime" name="startTime" value="{{event.startTime}}" >
 
                                     <label>End Time:</label>
                                     <input type="text" class="form-control timePickr" placeholder="End Time?"
-                                    id="endTime" name="endTime" value="{{group.endTime}}" >
+                                    id="endTime" name="endTime" value="{{event.endTime}}" >
 
-                                    <input type="hidden" name="groupID" value={{group.id}} >
+                                    <input type="hidden" name="eventID" value={{event.id}} >
 
                                     <input type="hidden" id="eventEditing" value="true">
-                                    <input type="hidden" id="latLong" value="{{latLong}}">
                             
                                 </div>
                             
@@ -59,12 +58,12 @@
                                         <textarea class="form-control"
                                             name="description" required
                                             rows="7"  placeholder="Your message"
-                                        >{{group.description}}</textarea>
+                                        >{{event.description}}</textarea>
                                     </div>
                                 </div>
                                 
                                 <div  class="col-12 col-md-12 col-sm-12" style="height:400px;" >
-                                    <input type="hidden" id="mapaddress" name="mapaddress">
+                                    <input type="hidden" id="mapaddress" name="mapaddress" value="{{latLong}}" >
  
                                     <input id="pac-input" class="controls" type="text" placeholder="Search Box">
                                     <div id="map" style="height:100%; width:100%;" ></div>

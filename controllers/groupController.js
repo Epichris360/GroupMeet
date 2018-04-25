@@ -113,10 +113,9 @@ const show = (req, res) => {
                 const yesterdaysDate = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
                 if( new Date( events[x].date ) >= yesterdaysDate ){
 
-                    const address = JSON.parse( events[x].mapAddress )
                     events[x].JSONstr = JSON.stringify({
                         name: events[x].name, description: events[x].description,
-                        address: address.formatted_address, 
+                        address: event[x].mapAddress.formatted_address, 
                         date: events[x].date, startTime: events[x].startTime,
                         endTime: events[x].endTime
                     })

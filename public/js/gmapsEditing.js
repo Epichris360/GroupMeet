@@ -7,7 +7,7 @@
 // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
 function initAutocompleteEdit() {
-    var latLong = JSON.parse( $("#latLong").val() )
+    var latLong = JSON.parse( $("#mapaddress").val() )
     var map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: latLong.lat, lng: latLong.lng},
       zoom: 13,
