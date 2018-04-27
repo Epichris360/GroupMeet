@@ -278,16 +278,6 @@ const joinedGroups = (req, res) => {
     })
 }
 
-/* 
-const pageData  = functions.paginationArrays(data, 12)
-        const pgLinks   = functions.pgLinks(pageData.length, page)
-
-        res.render("group/list", { vertexSession, groups: pageData[page], pgLinks,
-            imgBg: constants.genericBg[1].imgUrl })
-        return
-*/
-
-
 module.exports = {
     createGet, createPost, editGet, editPost, show, list, myGroups, joinedGroups, 
     joinGroup

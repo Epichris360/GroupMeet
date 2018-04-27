@@ -30,6 +30,14 @@
                     </div>
                     <div class="col-12 col-md-4">
                         <h1 >{{group.name}}</h1>
+                        <div class="social social-boxed social-colored social-cycling">
+                            <a class="social-facebook" href="#"><i class="fa fa-facebook"></i></a>
+                            <a class="social-twitter" href="#"><i class="fa fa-twitter"></i></a>
+                            <a class="social-gplus" href="#"><i class="fa fa-google-plus"></i></a>
+                            <a class="social-linkedin" href="#"><i class="fa fa-linkedin"></i></a>
+                            <a class="social-tumblr" href="#"><i class="fa fa-tumblr"></i></a>
+                        </div>
+                        <br />
                         {{#canJoin}}
                         <a href="/group/join-{{group.slug}}" class="btn btn-outline btn-success">Join</a>
                         {{/canJoin}}
@@ -37,6 +45,7 @@
                         {{#canEdit}} 
                             <a class="btn btn-outline btn-warning" href="/event/create-{{group.slug}}" >New Event</a>
                         {{/canEdit}}
+                        
                     </div>
                 </div> 
 
