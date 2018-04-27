@@ -197,6 +197,13 @@ const slugGen = (name) => {
     return newName
 }
 
+const isAuthRedirectSignUp = (user, res) => {
+    if( user.id == '' ){
+        res.redirect("/user/signup")
+        return
+    }  
+}
+
 module.exports = {
 
     shuffleArray:         shuffleArray,
@@ -215,7 +222,8 @@ module.exports = {
     blankVertexSession:   blankVertexSession,
     starVal:              starVal,
     reviewEditPerUser:    reviewEditPerUser,
-    slugGen:              slugGen
+    slugGen:              slugGen,
+    isAuthRedirectSignUp: isAuthRedirectSignUp
 }
 
   

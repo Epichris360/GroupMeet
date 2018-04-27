@@ -26,7 +26,7 @@ const createPost = (req, res) => {
     const user         = req.vertexSession.user
 
     const newGroup = {
-        imgUrl, name, description, shortDescrip, slug, owner_id: user.id
+        imgUrl, name, description, shortDescrip, slug, owner_id: user.id, members:[], userInfo:[]
     }
 
     turbo.create( collections.groups, newGroup )
@@ -74,6 +74,11 @@ const editPost = (req, res) => {
     const updatedGroup = {
         name: body.name, description: body.description, imgUrl: body.image,
     }
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    functions.isAuth(user, res)
     turbo.updateEntity( collections.groups, body.groupId, updatedGroup )
     .then(update => {
        res.redirect("/group/show-" + update.slug)
@@ -100,12 +105,15 @@ const show = (req, res) => {
     .then(group => {
         turbo.fetch( collections.events, { group_id: group.id } )
         .then(events => {
+            
             // splits the description into an array of paragraphs
             const description = group.description.split("\n")
             // is use to tell if the current user is the owner of the group
             // therefore given update, and delete capabilities
-            const canEdit  = group.owner_id == vertexSession.user.id
-            const notOwner = group.owner_id != vertexSession.user.id
+            const canEdit     = ( group.owner_id == vertexSession.user.id ) 
+
+            const joinedGroup = group.members.indexOf(vertexSession.user.id)
+            const canJoin    = ( group.owner_id != vertexSession.user.id ) && joinedGroup
             // events that will happen in the future
             let eventsFuture = []
             for( let x = 0; x < events.length; x++ ){
@@ -124,7 +132,7 @@ const show = (req, res) => {
 
             }
             res.render("group/show", { vertexSession, group: group, description, 
-                canEdit, notOwner, imgBg: constants.genericBg[1].imgUrl, events: eventsFuture
+                canEdit, canJoin, imgBg: constants.genericBg[1].imgUrl, events: eventsFuture
             })
             return
         })
@@ -200,6 +208,42 @@ const myGroups = (req, res) => {
     })
 }
 
+const joinGroup = (req, res) => {
+    const slug = req.params.slug
+
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    const user = vertexSession.user
+    
+    if( user.id == '' ){
+        res.redirect("/user/signup")
+        return
+    }else{
+        turbo.fetch( collections.groups, { slug: slug } )
+        .then(data => {
+            return data[0]
+        })
+        .then(group => {
+            group.members  = [ ...group.members, user.id ]
+            group.userInfo = [ ...group.userInfo, { id: user.id, email: user.email } ]
+            turbo.updateEntity( collections.groups, group.id, group )
+            .then(updated => {
+                res.redirect("/group/show-" + slug)
+                return 
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                err: err.message
+            })
+            return
+        })
+    }
+
+}
+
 const joinedGroups = (req, res) => {
     // groups that the person has joined list
     if(  req.vertexSession == null || req.vertexSession.user == null ){ 
@@ -213,6 +257,8 @@ const joinedGroups = (req, res) => {
     return
 }
 
+
 module.exports = {
     createGet, createPost, editGet, editPost, show, list, myGroups, joinedGroups, 
+    joinGroup
 }

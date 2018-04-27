@@ -27,7 +27,7 @@ const signInPost = (req, res) => {
             email: data.email, loggedIn: true,
             notloggedIn:false, 
         }
-        res.redirect( "/")
+        res.redirect("/")
         return
     })
     .catch(err => {
@@ -63,7 +63,7 @@ const signUpPost = (req, res) => {
             email: data.email, loggedIn: true,
             notloggedIn:false, 
         }
-        res.redirect( "back")
+        res.redirect("/")
         return        
     })
     .catch(err => {

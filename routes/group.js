@@ -24,6 +24,8 @@ router.get("/",           groupController.list          )
 // groups the user has joined
 router.get("/my-groups",  groupController.myGroups      )
 
+router.get("/join-:slug", groupController.joinGroup     )
+
 router.get("/joinedGroups", groupController.joinedGroups)
 
 module.exports = router
