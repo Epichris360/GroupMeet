@@ -56,5 +56,28 @@ router.get('/userUpdate', (req, res) => {
 	})
 })
 
+router.get('/testing2', (req, res) => {
+	turbo.fetchOne( collections.groups, "5ab2ccf9a53f36001451d4b6")
+	.then(data => {
+		const userInfo = data.userInfo
+		const emails = data.userInfo.map( u => u.email )
+		return emails
+	})
+	.then(emails => {
+		turbo.fetch(collections.user, { email:emails })
+		.then(data => {
+			res.status(200).json({
+				usersInGroup: data
+			})
+			return
+		})
+	})
+	.catch(err => {
+		res.status(500).json({
+			err: err.message
+		})
+		return
+	})
+})
 
 module.exports = router

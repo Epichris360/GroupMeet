@@ -231,7 +231,7 @@ const joinGroup = (req, res) => {
             turbo.updateEntity( collections.groups, group.id, group )
             .then(updated => {
                 res.redirect("/group/show-" + slug)
-                return 
+                return
             })
         })
         .catch(err => {
@@ -245,6 +245,13 @@ const joinGroup = (req, res) => {
 }
 
 const joinedGroups = (req, res) => {
+    // pagination code
+    let page
+    if( typeof req.query.page == "undefined" || parseInt( req.query.page ) == 1 ){
+        page = 0
+    }else{
+        page = parseInt( req.query.page ) 
+    }
     // groups that the person has joined list
     if(  req.vertexSession == null || req.vertexSession.user == null ){ 
         req.vertexSession = functions.blankVertexSession() 
@@ -252,10 +259,33 @@ const joinedGroups = (req, res) => {
     const vertexSession = req.vertexSession
     const user = vertexSession.user
     functions.isAuth(user, res)
-
-    res.render("group/joinedGroups", {vertexSession})
-    return
+    turbo.fetch( collections.groups, { members:user.id } )
+    .then(data => {
+        const imgBg = constants.genericBg[3].imgUrl
+        const pageData  = functions.paginationArrays(data, 12)
+        const pgLinks   = functions.pgLinks(pageData.length, page)
+        
+        res.render("group/joinedGroups", {  vertexSession, groups: data, imgBg,
+            groups: pageData[page], pgLinks,
+        })
+        return
+    })
+    .catch(err => {
+        res.status(500).json({
+            err: err.message
+        })
+        return
+    })
 }
+
+/* 
+const pageData  = functions.paginationArrays(data, 12)
+        const pgLinks   = functions.pgLinks(pageData.length, page)
+
+        res.render("group/list", { vertexSession, groups: pageData[page], pgLinks,
+            imgBg: constants.genericBg[1].imgUrl })
+        return
+*/
 
 
 module.exports = {
