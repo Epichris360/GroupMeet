@@ -11,5 +11,20 @@ const prototype = "prototype"
 	information, view here: https://mustache.github.io/#demo */
 router.get('/', staticController.index )
 
+router.get('/testing', (req, res) => {
+	turbo.fetch(collections.groups, null)
+	.then(data => {
+		res.status(200).json({
+			group: data[0]
+		})
+		return
+	})
+	.catch(err => {
+		res.status(500).json({
+			err: err.message
+		})
+		return
+	})
+})
 
 module.exports = router

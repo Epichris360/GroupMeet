@@ -117,7 +117,7 @@ const show = (req, res) => {
             const joinedGroup = ( group.members.indexOf(vertexSession.user.id) ) != -1 && ( group.owner_id != vertexSession.user.id )
             // can join checks if the user can join the group. So this wont allow users who have
             // already joined along with the owner who joins by default
-            const canJoin     = ( group.owner_id != vertexSession.user.id ) && joinedGroup
+            const canJoin     = ( group.owner_id != vertexSession.user.id ) && !joinedGroup
             // events that will happen in the future
             let eventsFuture = []
             for( let x = 0; x < events.length; x++ ){ 
@@ -140,6 +140,12 @@ const show = (req, res) => {
                 joinedGroup
             })
             return
+            /*res.status(200).json({
+                vertexSession, group: group, description, 
+                canEdit, canJoin, imgBg: constants.genericBg[1].imgUrl, events: eventsFuture,
+                joinedGroup
+            })
+            return*/
         })
 
     })

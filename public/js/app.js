@@ -83,13 +83,14 @@ $(document).ready(function() {
 
     $("#leaveBtn").on('click', function(e){
         alertify.confirm("Are You Sure About Leaving This Group?",
-        function(){
+        function(e){
             alertify.success('<h5>You Have Left The Group</h5>') 
             setInterval(function(){
-                location.href = $(this).attr('href')
+                //location.href = $(this).attr('href')
+                console.log('hi')
             }, 2000);
         },
-        function(){
+        function(e){
             e.preventDefault()
             alertify.error('<h3>Your Still In!</h3>')
             return
