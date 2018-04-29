@@ -42,6 +42,10 @@
                         <a href="/group/join-{{group.slug}}" class="btn btn-outline btn-success">Join</a>
                         {{/canJoin}}
 
+                        {{#joinedGroup}}
+                        <a href="/group/leaveGroup-{{group.slug}}" id="leaveBtn" class="btn btn-outline btn danger">Leave Group</a>
+                        {{/joinedGroup}}
+
                         {{#canEdit}} 
                             <a class="btn btn-outline btn-warning" href="/event/create-{{group.slug}}" >New Event</a>
                         {{/canEdit}}

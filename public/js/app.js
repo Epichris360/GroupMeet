@@ -77,9 +77,24 @@ $(document).ready(function() {
         },
         function(){
             alertify.error('<h3>Canceled</h3>')
+            return
         })
-        return
-        
     })
+
+    $("#leaveBtn").on('click', function(e){
+        alertify.confirm("Are You Sure About Leaving This Group?",
+        function(){
+            alertify.success('<h5>You Have Left The Group</h5>') 
+            setInterval(function(){
+                location.href = $(this).attr('href')
+            }, 2000);
+        },
+        function(){
+            e.preventDefault()
+            alertify.error('<h3>Your Still In!</h3>')
+            return
+        })
+    })
+
 })
 

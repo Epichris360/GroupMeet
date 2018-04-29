@@ -111,12 +111,16 @@ const show = (req, res) => {
             // is use to tell if the current user is the owner of the group
             // therefore given update, and delete capabilities
             const canEdit     = ( group.owner_id == vertexSession.user.id ) 
-
-            const joinedGroup = group.members.indexOf(vertexSession.user.id)
-            const canJoin    = ( group.owner_id != vertexSession.user.id ) && joinedGroup
+            // checks if current user has joined the group, by running an index search of the users
+            // id in the members array. if the user doesn't exist there then a -1 is returned else a pos num
+            // also must not be owner
+            const joinedGroup = ( group.members.indexOf(vertexSession.user.id) ) != -1 && ( group.owner_id != vertexSession.user.id )
+            // can join checks if the user can join the group. So this wont allow users who have
+            // already joined along with the owner who joins by default
+            const canJoin     = ( group.owner_id != vertexSession.user.id ) && joinedGroup
             // events that will happen in the future
             let eventsFuture = []
-            for( let x = 0; x < events.length; x++ ){
+            for( let x = 0; x < events.length; x++ ){ 
 
                 const yesterdaysDate = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
                 if( new Date( events[x].date ) >= yesterdaysDate ){
@@ -132,7 +136,8 @@ const show = (req, res) => {
 
             }
             res.render("group/show", { vertexSession, group: group, description, 
-                canEdit, canJoin, imgBg: constants.genericBg[1].imgUrl, events: eventsFuture
+                canEdit, canJoin, imgBg: constants.genericBg[1].imgUrl, events: eventsFuture,
+                joinedGroup
             })
             return
         })
@@ -278,7 +283,46 @@ const joinedGroups = (req, res) => {
     })
 }
 
+const leaveGroup = (req, res) => {
+    const slug = req.params.slug
+
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    const user = vertexSession.user
+    
+    if( user.id == '' ){
+        res.redirect("/user/signup")
+        return
+    }else{
+        turbo.fetch( collections.groups, { slug })
+        .then(data => {
+            return data[0]
+        })
+        .then(group => {
+            // remove id from group.members
+            const newMembers = group.members.filter( m => m != user.id )
+            group.members    = newMembers
+            // removing user from userInfo
+            const userInfo   = group.userInfo.filter( u => u.id != user.id)
+            group.userInfo   = userInfo
+            turbo.updateEntity( collections.groups, group.id, group )
+            .then(data => {
+                res.redirect('/group')
+                return
+            })
+        })
+        .catch(err => {
+            res.status(500).json({
+                err: err.message
+            })
+            return
+        })
+    }
+}
+
 module.exports = {
     createGet, createPost, editGet, editPost, show, list, myGroups, joinedGroups, 
-    joinGroup
+    joinGroup, leaveGroup
 }

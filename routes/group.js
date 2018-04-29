@@ -19,13 +19,15 @@ router.post("/edit-:slug", groupController.editPost     )
 router.get("/show-:slug",  groupController.show         )
 
 // general list of groups. Will be react page with map/search etc
-router.get("/",           groupController.list          )
+router.get("/",            groupController.list          )
 
 // groups the user has joined
-router.get("/my-groups",  groupController.myGroups      )
+router.get("/my-groups",    groupController.myGroups      )
 
-router.get("/join-:slug", groupController.joinGroup     )
+router.get("/join-:slug",   groupController.joinGroup     )
 
-router.get("/joinedGroups", groupController.joinedGroups)
+router.get("/joinedGroups",   groupController.joinedGroups)
+
+router.get("/leaveGroup-:slug", groupController.leaveGroup)
 
 module.exports = router
