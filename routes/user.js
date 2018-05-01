@@ -18,4 +18,11 @@ router.post('/signin', userController.signInPost)
 
 router.get("/signout", userController.signOut   )
 
+
+router.get("*", (req,res) => {
+    res.redirect('/404')
+    return
+})
+
+
 module.exports = router

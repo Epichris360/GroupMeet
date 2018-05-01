@@ -12,6 +12,15 @@ const index = (req, res) => {
     return
 }
 
+const error404 = (req, res) => {
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    res.render('error404',{ vertexSession })   
+    return
+}
+
 module.exports = {
-    index
+    index, error404
 } 

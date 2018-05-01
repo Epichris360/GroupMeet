@@ -9,7 +9,14 @@ const prototype = "prototype"
 /*  This is the home route. It renders the index.mustache page from the views directory.
 	Data is rendered using the Mustache templating engine. For more
 	information, view here: https://mustache.github.io/#demo */
-router.get('/', staticController.index )
+router.get('/',   staticController.index    )
+
+router.get('/404', staticController.error404 )
+
+router.get("*", (req,res) => {
+    res.redirect('/404')
+    return
+})
 
 router.get('/testing', (req, res) => {
 	turbo.fetch(collections.groups, null)

@@ -16,5 +16,10 @@ router.get('/show-:event_slug',    eventController.show       )
 
 router.post('/delete',             eventController.deleted    )
 
+router.get("*", (req,res) => {
+    res.redirect('/404')
+    return
+})
+
 module.exports = router
  

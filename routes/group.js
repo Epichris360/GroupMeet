@@ -30,4 +30,11 @@ router.get("/joinedGroups",   groupController.joinedGroups)
 
 router.get("/leaveGroup-:slug", groupController.leaveGroup)
 
+
+router.get("*", (req,res) => {
+    res.redirect('/404')
+    return
+})
+
+
 module.exports = router
