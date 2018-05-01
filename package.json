@@ -13,6 +13,7 @@
     "bluebird": "^3.5.1",
     "debug": "^3.1.0",
     "dotenv": "^5.0.1",
+    "full-text-search-light": "0.0.17",
     "moment": "^2.20.1",
     "nodemon": "^1.17.1",
     "react": "^16.2.0",
@@ -24,7 +25,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "superagent": "^3.8.2",
-    "turbo360": "latest",
+    "turbo360": "^1.6.19",
     "vertex360": "latest"
   },
   "devDependencies": {

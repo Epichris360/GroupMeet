@@ -81,17 +81,16 @@ $(document).ready(function() {
         })
     })
 
-    $("#leaveBtn").on('click', function(e){
+    $("#leaveBtn").on('click', function(event){
+        event.preventDefault()
         alertify.confirm("Are You Sure About Leaving This Group?",
         function(e){
             alertify.success('<h5>You Have Left The Group</h5>') 
             setInterval(function(){
-                //location.href = $(this).attr('href')
-                console.log('hi')
+                location.href = $(this).attr('#leaveBtn')
             }, 2000);
         },
         function(e){
-            e.preventDefault()
             alertify.error('<h3>Your Still In!</h3>')
             return
         })

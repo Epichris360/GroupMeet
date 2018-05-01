@@ -203,7 +203,7 @@ const myGroups = (req, res) => {
     functions.isAuth(user, res)
     const imgBg = constants.genericBg[2].imgUrl
 
-    turbo.fetch( collections.groups, null )
+    turbo.fetch( collections.groups, { owner_id: user.id } )
     .then(data => {
         const pageData  = functions.paginationArrays(data, 12)
         const pgLinks   = functions.pgLinks(pageData.length, page)
