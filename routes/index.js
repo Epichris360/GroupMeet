@@ -13,39 +13,5 @@ router.get('/',   staticController.index    )
 
 router.get('/404', staticController.error404 )
 
-router.get('/testing', (req, res) => {
-	turbo.fetch(collections.groups, null)
-	.then(data => {
-		res.status(200).json({
-			group: data[0]
-		})
-		return
-	})
-	.catch(err => {
-		res.status(500).json({
-			err: err.message
-		})
-		return
-	})
-})
-
-router.get('/testing2', (req, res) => {
-	const obj = { name:"hi there hi there" }
-	turbo.create( prototype, obj )
-	.then(data => {
-		res.status(200).json({
-			result: data
-		})
-		return
-	})
-	.catch(err => {
-		res.status(500).json({
-			err: err.message
-		})
-		return
-	})
-})
-
-
 module.exports = router
 

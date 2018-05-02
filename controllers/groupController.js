@@ -140,12 +140,6 @@ const show = (req, res) => {
                 joinedGroup
             })
             return
-            /*res.status(200).json({
-                vertexSession, group: group, description, 
-                canEdit, canJoin, imgBg: constants.genericBg[1].imgUrl, events: eventsFuture,
-                joinedGroup
-            })
-            return*/
         })
 
     })

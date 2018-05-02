@@ -16,6 +16,8 @@ router.get('/show-:event_slug',    eventController.show       )
 
 router.post('/delete',             eventController.deleted    )
 
+router.get('/search',              eventController.search     )
+
 router.get("*", (req,res) => {
     res.redirect('/404')
     return

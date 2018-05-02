@@ -15,7 +15,7 @@ import Intro from './components/Intro'
 
 const app = (
 	<Provider store={store.configure(null)}>
-		<Intro />
+		<h1>Hello there!!!</h1>
 	</Provider>
 )
 

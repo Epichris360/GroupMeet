@@ -161,6 +161,11 @@ const deleted = (req, res) => {
     })
 }
 
+const search = (req, res) => {
+    res.render('event/search')
+    return
+}
+
 module.exports = {
-    createPost, createGet, editGet, editPost, show, deleted
+    createPost, createGet, editGet, editPost, show, deleted, search
 }
