@@ -13,11 +13,6 @@ router.get('/',   staticController.index    )
 
 router.get('/404', staticController.error404 )
 
-router.get("*", (req,res) => {
-    res.redirect('/404')
-    return
-})
-
 router.get('/testing', (req, res) => {
 	turbo.fetch(collections.groups, null)
 	.then(data => {
