@@ -5,11 +5,12 @@
 * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 */
 
-import Users from './Users'
+import Users  from './Users'
+import Main   from './Main'
 import Search from './Search'
 
 export {
 
-	Users, Search
+	Users, Main, Search
 	
 } 

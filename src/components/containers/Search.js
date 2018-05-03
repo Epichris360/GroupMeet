@@ -1,41 +1,46 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import actions from '../../actions'
+import { Map }              from '../presentation'
+import { connect }          from 'react-redux'
 
-
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-	This container serves primarily as an example of how to execute basic
-	user tasks like login, logout, etc. Feel free to re-purpose this componenet 
-	for your own project or create your own components using the functions 
-	from here as a guide.
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-*/
-
-class Search extends Component { 
-	constructor(){
-		super()
-		this.state = {
-
-		}
-	}
-
-	render(){
-		return (
-			<div>
-				<h1>Hi</h1>
-			</div>
-		)
-	}
+class Search extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            map:null
+        }
+    }
+    centerChanged(center){
+        console.log('Map Moved', JSON.stringify(center) )
+        console.log('lat '+center.lat()+' '+'lng'+center.lng() )
+        //this.centerChanged.bind(this)
+    }
+    render(){
+        const markers =  []
+        return(
+            <div className="sidebar-wrapper" style={{height:'600px'}} >
+                <Map 
+                    onMapReady={ map => {
+                        if(this.state.map == null)
+                            return
+                        this.setState({map})
+                    }}
+                    locationChanged={console.log('hi')}
+                    markers={markers}
+                    zoom={14}
+                    center={{lat:40.7224017, lng:-73.9896719}}
+                    containerElement={ <div style={{height:100+'%'}} /> }
+                    mapElement={ <div style={{height:100+'%'}} /> }
+                />
+            </div>
+        )
+    }
 }
 
-const stateToProps = (state) => {
-	return {
-	}
+const stateToProps = state => {
+    
+}
+const dispatchToProps = dispatch => {
+
 }
 
-const dispatchToProps = (dispatch) => {
-	return {
-	}
-}
-
-export default connect(stateToProps, dispatchToProps)(Search) 
+export default connect(stateToProps,dispatchToProps)(Search)
