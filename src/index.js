@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import ReactDOM 			from 'react-dom'
 import store 				from './stores'
 import { Provider } 		from 'react-redux'
-import  {Users} 			from './components/containers'
+import { Search } 			from './components/containers'
 
 const app = (
 	<Provider store={store.configure(null)}>
-		<Users />
+		<Search />
 	</Provider>
 )
 

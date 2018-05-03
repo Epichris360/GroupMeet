@@ -11,7 +11,7 @@ import actions from '../../actions'
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 */
 
-class Users extends Component { 
+class Search extends Component { 
 	constructor(){
 		super()
 		this.state = {
