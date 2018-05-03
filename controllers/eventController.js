@@ -162,7 +162,7 @@ const deleted = (req, res) => {
 }
 
 const search = (req, res) => {
-    res.render('event/search')
+    res.render('event/search', {bgImg: constants.genericBg[4].imgUrl })
     return
 }
 

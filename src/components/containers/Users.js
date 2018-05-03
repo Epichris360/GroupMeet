@@ -11,7 +11,7 @@ import actions from '../../actions'
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 */
 
-class Users extends Component {
+class Users extends Component { 
 	constructor(){
 		super()
 		this.state = {
@@ -165,4 +165,4 @@ const dispatchToProps = (dispatch) => {
 	}
 }
 
-export default connect(stateToProps, dispatchToProps)(Users)
+export default connect(stateToProps, dispatchToProps)(Users) 

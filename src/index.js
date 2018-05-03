@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import store from './stores'
-import { Provider } from 'react-redux'
-import Intro from './components/Intro'
+import ReactDOM 			from 'react-dom'
+import store 				from './stores'
+import { Provider } 		from 'react-redux'
+import  {Users} 			from './components/containers'
+
+const app = (
+	<Provider store={store.configure(null)}>
+		<Users />
+	</Provider>
+)
+
+
+ReactDOM.render(app, document.getElementById('root'))
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
 	This is the entry point of the React app with Redux
@@ -11,13 +20,3 @@ import Intro from './components/Intro'
 	to remove it and replace with your own visual content.
 * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 */
-
-
-const app = (
-	<Provider store={store.configure(null)}>
-		<h1>Hello there!!!</h1>
-	</Provider>
-)
-
-
-ReactDOM.render(app, document.getElementById('root'))

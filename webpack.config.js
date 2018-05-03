@@ -1,14 +1,14 @@
-var webpack 			  = require('webpack')
-var path 			      = require('path')
+var webpack = require('webpack')
+var path = require('path')
 var UglifyJsWebpackPlugin = require('uglifyjs-webpack-plugin')
-var config 				  = require('./package.json')
+var config = require('./package.json')
 
 module.exports = {
 	entry: {
 		app: './src/index.js'
 	},
 	output: {
-		path: __dirname+'/public/dist',
+		path: __dirname+'/public/dist', 
 		filename: 'bundle/[name].js',
         sourceMapFilename: 'bundle/[name].map',
         chunkFilename: 'bundle/[name].js'
@@ -25,7 +25,7 @@ module.exports = {
 	        }
 	    })
 	] : [],
-	optimization: {
+	optimization: process.env.NODE_ENV === 'production' ? {
 		minimize: true,
 		minimizer: [
 			new UglifyJsWebpackPlugin({
@@ -33,13 +33,25 @@ module.exports = {
 					output: {
 						comments: false
 					},
-					compress: {
-						drop_console: true,
-						dead_code: true
-					}
+					compress: process.env.NODE_ENV === 'production' ? {
+                        drop_console: true,
+                        dead_code: true
+                    } : {}
 				}
 			})
 		],
+		splitChunks: {
+			cacheGroups: {
+				vendor: {
+					test: /node_modules/,
+					chunks: 'initial',
+					name: 'commons',
+					enforce: true
+				}
+			}
+		}
+	} : {
+		minimize: false,
 		splitChunks: {
 			cacheGroups: {
 				vendor: {
@@ -60,10 +72,6 @@ module.exports = {
 				query:{
 					presets:['react', 'env']
 				}
-			},
-			{
-				test: /\.json$/,
-				loader: 'json-loader'
 			},
 			{
 				test: /\.(jpg|png|svg)$/,
