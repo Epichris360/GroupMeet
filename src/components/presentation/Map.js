@@ -14,12 +14,10 @@ class Map extends Component {
 		// console.log('mapMoved: '+JSON.stringify(this.state.map.getCenter()))
 		if (this.props.locationChanged != null)
 			this.props.locationChanged(this.state.map.getCenter())
-
 	}
 
 	zoomChanged(){
 		// console.log('zoomChanged: '+this.state.map.getZoom())
-
 	}
 
 	mapLoaded(map){
@@ -58,7 +56,10 @@ class Map extends Component {
 		            	onClick={this.handleMarkerClick.bind(this, marker)} 				      
 				      	{...marker} />
 			    	)
-			    )}
+				)}
+				<Marker
+					position={{ lat: 40.7224017, lng: -73.9896719 }}
+				/>
 			</GoogleMap>
 		)
 	}

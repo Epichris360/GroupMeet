@@ -13,7 +13,7 @@ module.exports = {
         sourceMapFilename: 'bundle/[name].map',
         chunkFilename: 'bundle/[name].js'
 	},
-	node: {
+	node: { 
 		fs: 'empty'
 	},
 	devtool: '#source-map',	

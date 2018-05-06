@@ -44,7 +44,7 @@ gulp.task('imgs', function(){
 gulp.task('style', ['css', 'copy-fonts', 'imgs'], function(){})
 
 
-gulp.task('js', function(){
+gulp.task('js-main', function(){
     return gulp.src(
             [   
                 './public/js/core.min.js',
@@ -66,6 +66,31 @@ gulp.task('js', function(){
         .pipe(gp_uglify())
         .pipe(gulp.dest('./public/dist/js/')) 
 });
+
+gulp.task('js-react', function(){
+    return gulp.src(
+            [   
+                './public/js/core.min.js',
+                './public/js/thesaas.min.js',
+                './public/js/script.js',
+                //'./public/js/dropzone.js',
+                //'./public/js/app.js',
+                //'./public/js/jquery.timepicker.min.js',
+                //'./public/js/flatpickr.min.js',
+                //'./public/js/gmaps.js',
+                //'./public/js/gmapsEditing.js',
+                //'./public/js/alertify.min.js',
+                //'./public/js/mapsTimeAndDatePickr.js',
+            ]
+        )
+        .pipe(gp_concat('vendorReact.min.js'))
+        .pipe(gulp.dest('./public/dist/js/'))
+        .pipe(gp_rename('vendorReact.min.js'))
+        .pipe(gp_uglify())
+        .pipe(gulp.dest('./public/dist/js/')) 
+});
+
+gulp.task('js', ['js-main', 'js-react'], function(){})
 
 gulp.task('es6-es5', ['js'], function(){
     return gulp.src([

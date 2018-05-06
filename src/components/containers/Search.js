@@ -1,36 +1,21 @@
 import React, { Component } from 'react'
-import { Map }              from '../presentation'
+import { Map }              from '.'
 import { connect }          from 'react-redux'
 
 class Search extends Component{
     constructor(props){
         super(props)
-        this.state = {
-            map:null
-        }
-    }
-    centerChanged(center){
-        console.log('Map Moved', JSON.stringify(center) )
-        console.log('lat '+center.lat()+' '+'lng'+center.lng() )
-        //this.centerChanged.bind(this)
+        this.state = {}
     }
     render(){
-        const markers =  []
         return(
-            <div className="sidebar-wrapper" style={{height:'600px'}} >
-                <Map 
-                    onMapReady={ map => {
-                        if(this.state.map == null)
-                            return
-                        this.setState({map})
-                    }}
-                    locationChanged={console.log('hi')}
-                    markers={markers}
-                    zoom={14}
-                    center={{lat:40.7224017, lng:-73.9896719}}
-                    containerElement={ <div style={{height:100+'%'}} /> }
-                    mapElement={ <div style={{height:100+'%'}} /> }
-                />
+            <div className="container" style={{height:'600px'}} >
+                <div className="row">
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12" >
+                        <Map /> 
+                    </div>
+                    <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12" ></div>
+                </div>
             </div>
         )
     }

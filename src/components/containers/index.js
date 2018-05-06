@@ -8,9 +8,10 @@
 import Users  from './Users'
 import Main   from './Main'
 import Search from './Search'
+import Map    from './Map'
 
 export {
 
-	Users, Main, Search
+	Users, Main, Search, Map
 	
 } 
