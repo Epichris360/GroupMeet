@@ -2,12 +2,11 @@ import React, { Component } from 'react'
 import ReactDOM 			from 'react-dom'
 import store 				from './stores'
 import { Provider } 		from 'react-redux'
-import { Map } 			from './components/containers'
-import { Container, Work } from './components/gmaps'
+import { Search } 			from './components/containers'
 
 const app = (
 	<Provider store={store.configure(null)}>
-		<Map />
+		<Search />
 	</Provider> 
 )
 
