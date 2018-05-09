@@ -166,6 +166,35 @@ const search = (req, res) => {
     return
 }
 
+const getEvents = (req, res) => {
+    turbo.fetch( collections.events, null )
+    .then(events => {
+        let eventsFuture = []
+        for( let x = 0; x < events.length; x++ ){ 
+
+            const yesterdaysDate = ( d => new Date(d.setDate(d.getDate()-1)) )(new Date);
+            if( new Date( events[x].date ) >= yesterdaysDate ){
+
+                events[x].JSONstr = JSON.stringify({
+                    name: events[x].name, description: events[x].description,
+                    address: events[x].mapAddress, 
+                    date: events[x].date, startTime: events[x].startTime,
+                    endTime: events[x].endTime
+                })
+                eventsFuture.push( events[x] )
+            }
+
+        }
+        res.status(200).json({
+            events: eventsFuture
+        })
+        return
+    })
+    .catch(err => {
+
+    })
+}
+
 module.exports = {
-    createPost, createGet, editGet, editPost, show, deleted, search
+    createPost, createGet, editGet, editPost, show, deleted, search, getEvents
 }

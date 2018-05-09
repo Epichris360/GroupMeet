@@ -13,7 +13,7 @@ export default {
 		return dispatch => {
 			return dispatch(TurboClient.getRequest('user', params, constants.USERS_RECEIVED))
 		}
-	},
+	}, 
 
 	addUser: (params) => {
 		return dispatch => {
@@ -38,6 +38,15 @@ export default {
 	currentUser: () => {
 		return dispatch => {
 			return dispatch(TurboClient.currentUser(constants.CURRENT_USER_RECEIVED))
+		}
+	},
+
+	fetchEvents: (events) => {
+		return dispatch => {
+			return dispatch({
+				type: constants.EVENTS_RECEIVED,
+				data: events
+			})
 		}
 	}
 	

@@ -4,10 +4,10 @@
 */
 
 
-import userReducer from './userReducer'
-
+import userReducer  from './userReducer'
+import eventReducer from './eventReducer'
 export {
 	
-	userReducer
+	userReducer, eventReducer
 	
 }

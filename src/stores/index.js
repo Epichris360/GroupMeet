@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux'
 import thunk from 'redux-thunk'
-import { userReducer } from '../reducers'
+import { userReducer, eventReducer } from '../reducers'
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * *
 	This is a store with one reducer: userReducer. When 
@@ -15,7 +15,8 @@ export default {
 	configure: (initialState) => { // initialState can be null
 		
 		const reducers = combineReducers({ // insert reducers here
-			user: userReducer
+			user: userReducer,
+			event: eventReducer
 		})
 
 		if (initialState){
