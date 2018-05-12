@@ -1,14 +1,41 @@
 import React, { Component } from 'react'
 import { connect }          from 'react-redux'
+import actions              from '../../actions'
 
 class Panel extends Component{
     constructor(props){
         super(props)
         this.state = {
-            
+               
+        }
+    }
+    rowClicked(ev){
+        // 
+        let events   = this.props.event
+
+        for( let x = 0; x < events.length; x++ ){
+            if( ev.id == events[x].id ){
+                events[x].eventSelected = true
+            }else{
+                events[x].eventSelected = false
+            }
+        }
+        this.props.fetchEvents(events)
+        this.forceUpdate()
+        return
+        
+    }
+    classNameTR(ev){
+        if( typeof ev.className == "undefined" ){
+            console.log(" !!!!")
+            return ""
+        }else{
+            console.log('ev.className: ',ev.className)
+            return ev.className
         }
     }
     render(){
+        const events = this.props.event
         return(
             <div>
                 <h3>Check Out Up Coming Events!</h3>
@@ -20,9 +47,11 @@ class Panel extends Component{
                         <th>Time</th>
                     </tr>
                     {
-                        this.props.event.map(ev => {
+                        events.map(ev => {
                             return(
-                                <tr>
+                                <tr style={ ev.eventSelected ? style.trSelected : {} } 
+                                    onClick={ this.rowClicked.bind(this, ev) } 
+                                >
                                     <td>{ev.name}</td>
                                     <td>{ev.date}</td>
                                     <td>{`${ev.startTime} - ${ev.endTime}`}</td>
@@ -30,7 +59,6 @@ class Panel extends Component{
                             )
                         })
                     }
-
                 </table>
             </div>
         )
@@ -39,13 +67,24 @@ class Panel extends Component{
 
 const stateToProps = state => {
     const { event } = state
+    console.log('event!!: ',event)
     return{
         event
     }
 }
 
 const dispatchToProps = dispatch => {
-
+    return{
+        fetchEvents: events => dispatch( actions.fetchEvents(events) )
+    }
 }
 
-export default connect(stateToProps,dispatchToProps)(Panel)
+const style = {
+    trSelected: {
+        backgroundColor:"#f2f2f2"
+    }
+}
+
+
+
+export default connect(stateToProps,dispatchToProps)(Panel) 

@@ -11,7 +11,6 @@ class Map extends Component {
 			map: null
 		}
 	}
-
 	mapLoaded(map){
 		if (this.state.map != null)
 			return
@@ -19,7 +18,8 @@ class Map extends Component {
 		this.props.onMapReady(map)
 		this.setState({
 			map: map
-		})
+        })
+        return
 	}
     infoWindowShow(marker){
         console.log('print', marker)
@@ -27,6 +27,7 @@ class Map extends Component {
 	render(){
 		return (
 			<GoogleMap
+                ref={this.mapLoaded.bind(this)}
 			    defaultZoom={this.props.zoom}
 			    defaultCenter={this.props.center}
             >
@@ -58,7 +59,9 @@ const stateToProps = state => {
 }
 
 const dispatchToProps = dispatch => {
-
+    return{
+        
+    }
 }
 
 export default withGoogleMap(connect(stateToProps, dispatchToProps)(Map))

@@ -14,7 +14,12 @@ class Search extends Component{
     componentDidMount(){
         axios.get('/api/get-events')
         .then( response => {
-            this.props.fetchEvents(response.data.events)
+            let events = response.data.events
+            for(let x = 0; x < events.length; x++){
+                events[x].eventSelected = false
+            }
+            console.log('events: ',events)
+            this.props.fetchEvents(events)
             return
         })
         .catch( err => {
