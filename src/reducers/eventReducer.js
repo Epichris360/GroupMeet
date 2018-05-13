@@ -17,10 +17,15 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 
 		case constants.EVENTS_RECEIVED:
-            newState = action.data
-            return newState
+			return [...action.data]
+			
+		case constants.EVENT_UPDATE:
+			return state.map(
+                e => event(e,action)
+            )
         
 		default:
 			return state
 	}
 }
+

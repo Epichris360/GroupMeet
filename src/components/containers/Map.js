@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
+import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
 import { connect }          from 'react-redux'
 
 
@@ -24,6 +24,7 @@ class Map extends Component {
     infoWindowShow(marker){
         console.log('print', marker)
     }
+
 	render(){
 		return (
 			<GoogleMap
@@ -32,6 +33,7 @@ class Map extends Component {
 			    defaultCenter={this.props.center}
             >
                 {this.props.event.map((ev, index) => {
+                        console.log('ev: ',ev)
                         return(
                             <Marker 
                                 key={index} 
@@ -40,7 +42,14 @@ class Map extends Component {
                                 title={ev.name} 
                                 position={ev.mapAddress.latLng}
                                 onClick={this.infoWindowShow.bind(this,ev)}
-                            >
+                            >   
+                            {   ev.eventSelected ? 
+                                <InfoWindow onCloseClick={ console.log('hi!!!') }>
+                                    <div>
+                                        Info goes here
+                                    </div>
+                                </InfoWindow> : null
+                            }
                                 
                             </Marker>
                         )

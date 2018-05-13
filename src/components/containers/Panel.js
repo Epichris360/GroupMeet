@@ -6,7 +6,7 @@ class Panel extends Component{
     constructor(props){
         super(props)
         this.state = {
-               
+            
         }
     }
     rowClicked(ev){
@@ -21,18 +21,8 @@ class Panel extends Component{
             }
         }
         this.props.fetchEvents(events)
-        this.forceUpdate()
         return
         
-    }
-    classNameTR(ev){
-        if( typeof ev.className == "undefined" ){
-            console.log(" !!!!")
-            return ""
-        }else{
-            console.log('ev.className: ',ev.className)
-            return ev.className
-        }
     }
     render(){
         const events = this.props.event
@@ -67,7 +57,6 @@ class Panel extends Component{
 
 const stateToProps = state => {
     const { event } = state
-    console.log('event!!: ',event)
     return{
         event
     }
