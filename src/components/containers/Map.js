@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
-import { withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps'
-import { connect }          from 'react-redux'
-
+import React, { Component }         from 'react'
+import { withGoogleMap, 
+    GoogleMap, Marker, InfoWindow } from 'react-google-maps'
+import { connect }                  from 'react-redux'
+import actions                      from '../../actions'
 
 class Map extends Component {
 
@@ -21,10 +22,28 @@ class Map extends Component {
         })
         return
 	}
-    infoWindowShow(marker){
-        console.log('print', marker)
+    infoWindowShow(ev){
+        // 
+        let events   = this.props.event
+        for( let x = 0; x < events.length; x++ ){
+            if( ev.id == events[x].id ){
+                events[x].eventSelected = true
+            }else{
+                events[x].eventSelected = false
+            }
+        }
+        this.props.fetchEvents(events)
+        return
     }
-
+    closeInfoWindowAndUnSelect(ev){
+        // 
+        let events   = this.props.event
+        for( let x = 0; x < events.length; x++ ){
+            events[x].eventSelected = false
+        }
+        this.props.fetchEvents(events)
+        return
+    }
 	render(){
 		return (
 			<GoogleMap
@@ -33,7 +52,6 @@ class Map extends Component {
 			    defaultCenter={this.props.center}
             >
                 {this.props.event.map((ev, index) => {
-                        console.log('ev: ',ev)
                         return(
                             <Marker 
                                 key={index} 
@@ -43,12 +61,20 @@ class Map extends Component {
                                 position={ev.mapAddress.latLng}
                                 onClick={this.infoWindowShow.bind(this,ev)}
                             >   
-                            {   ev.eventSelected ? 
-                                <InfoWindow onCloseClick={ console.log('hi!!!') }>
+                            {   
+                                ev.eventSelected ? 
+                                <InfoWindow 
+                                    onCloseClick={ this.closeInfoWindowAndUnSelect.bind(this,ev) }
+                                >
                                     <div>
-                                        Info goes here
+                                        <h6>{ev.name}</h6>
+                                        <p style={{width:"300px", height:"100%"}} >
+                                            {ev.description.substr(0,300)}...
+                                        </p>
+                                        <br />
+                                        <a className="btn btn-success" href={`/group/show-${ev.group_slug}`}>Go To Group</a>
                                     </div>
-                                </InfoWindow> : null
+                                </InfoWindow>  : null
                             }
                                 
                             </Marker>
@@ -69,7 +95,7 @@ const stateToProps = state => {
 
 const dispatchToProps = dispatch => {
     return{
-        
+        fetchEvents: events => dispatch( actions.fetchEvents(events) )   
     }
 }
 

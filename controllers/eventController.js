@@ -45,7 +45,7 @@ const createPost = (req, res) => {
         name: body.name, description: body.description, date: body.date, startTime: body.startTime,
         endTime: body.endTime,  mapAddress: JSON.parse( body.mapaddress), group_id: body.groupID, 
         created_at: new Date().toString(), updated_at: new Date().toString(),
-        event_slug: event_slug
+        event_slug: event_slug, group_slug: group_slug
     } 
     
     turbo.create( collections.events, newEvent )

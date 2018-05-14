@@ -18,7 +18,6 @@ class Search extends Component{
             for(let x = 0; x < events.length; x++){
                 events[x].eventSelected = false
             }
-            console.log('events: ',events)
             this.props.fetchEvents(events)
             return
         })
