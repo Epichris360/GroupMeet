@@ -7,15 +7,15 @@ class Panel extends Component{
     constructor(props){
         super(props)
         this.state = {
-            page: 1, rowsPerPage: 6, chunkArray: []
+            page: 1, rowsPerPage: 6, numPgs: 0,
+            nextPage:false , lastPage: false
         }
-    }
-    componentWillMount(){
-        this.chunkArray.bind(this)
-        return
+        // false deactivates the corresponding button, true does other wise
     }
     componentWillReceiveProps(props){
-        this.chunkArray.bind(this)
+        const numPgs   = this.chunk(props).length
+        const nextPage = numPgs > 1 // will return true if numPgs is larger then 1 else it will return false
+        this.setState({ numPgs, nextPage})
         return
     }
     rowClicked(ev){
@@ -31,39 +31,39 @@ class Panel extends Component{
         this.props.fetchEvents(events)
         return
     }
-    chunkArray() {
-        const event       = this.props.event
-        const rowsPerPage = this.state.rowsPerPage 
-        let   myArray     = []
-      
-        for(var i = 0; i < event.length; i += rowsPerPage) {
-          myArray.push(event.slice(i, rowsPerPage))
-        }
-        console.log('myArray: ',myArray)
-        this.setState({chunkArray: myArray})
-        return 
+    chunk(props = this.props){
+        const newArr = _.chunk(props.event, this.state.rowsPerPage)
+        return newArr
     }
-    chunk(){
-        const newArr = _.chunk(this.props.event, this.state.rowsPerPage)
-        console.log('lodash: ',newArr)
+    lastPage(){
+        const { page, numPgs, nextPage, lastPage } = this.state
+        // lets say im on page 3
+        if( page > 1 ){
+            this.setState({ page: this.state.page - 1, lastPage: true })
+        }
+        return
+    }
+    nextPage(){
+        const { page, numPgs, nextPage, lastPage } = this.state
+        if( page < lastPage ){
+            this.setState({ page: this.state.page + 1, nextPage: true })
+        }
         return
     }
     render(){
-        const newArr = _.chunk(this.props.event, this.state.rowsPerPage)
-        console.log('newArr: ',newArr)
+        const paginationArray = this.chunk().length == 0 ? [] : this.chunk()[this.state.page - 1]
         return(
             <div>
                 <h3>Check Out Up Coming Events!</h3>
                 <hr />
-                <button onClick={ () => console.log('this.state: ',this.state) } >this.state</button>
                 <table className="table" >
                     <tr>
                         <th>Event Name</th> 
-                        <th>Date</th>
-                        <th>Time</th>
+                        <th>Date</th> 
+                        <th>Time</th> 
                     </tr>
                     {//  this.props.event.
-                        newArr[this.state.page].map(ev => {
+                        paginationArray.map(ev => {
                             return(
                                 <tr style={ ev.eventSelected ? style.trSelected : {} } 
                                     onClick={ this.rowClicked.bind(this, ev) } 
@@ -76,6 +76,16 @@ class Panel extends Component{
                         })
                     }
                 </table>
+                <div>
+                    <button className="btn btn-info" 
+                        style={ this.state.lastPage ? {} : style.cursor } 
+                        onClick={ this.lastPage.bind(this) } 
+                    > { '< Last' } </button>
+                    <button className="btn btn-info" 
+                        style={ this.state.nextPage ? {} : style.cursorNext }
+                        onClick={ this.nextPage.bind(this) }
+                    > { 'Next >' } </button>
+                </div>
             </div>
         )
     }
@@ -96,7 +106,20 @@ const dispatchToProps = dispatch => {
 
 const style = {
     trSelected: {
-        backgroundColor:"#f2f2f2"
+        backgroundColor: "#f2f2f2"
+    },
+    cursor: {
+        cursor:          'not-allowed',
+        pointerEvents:   'none',
+        backgroundColor: '#9be0ff',
+        borderColor:     '#9be0ff'
+    },
+    cursorNext: {
+        cursor:          'not-allowed',
+        pointerEvents:   'none',
+        backgroundColor: '#9be0ff',
+        borderColor:     '#9be0ff',
+        float:           'right'
     }
 }
 
