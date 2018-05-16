@@ -67,7 +67,7 @@ class Panel extends Component{
                         <th>Date</th> 
                         <th>Time</th> 
                     </tr>
-                    {//  this.props.event.
+                    {
                         paginationArray.map(ev => {
                             return(
                                 <tr style={ ev.eventSelected ? style.trSelected : {} } 
