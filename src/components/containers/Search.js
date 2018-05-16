@@ -62,6 +62,7 @@ class Search extends Component{
 
 const stateToProps = state => {
     const { event } = state
+    console.log('event: ',event)
     return{
         event
     }

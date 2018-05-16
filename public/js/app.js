@@ -65,7 +65,7 @@ $(document).ready(function() {
                     alertify.success('<h5>The Event Was Deleted!!!</h5>') 
                     setInterval(function(){
                         location.reload()
-                    }, 2000);
+                    }, 1000);
 
                     return
                 },

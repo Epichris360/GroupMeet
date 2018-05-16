@@ -7,7 +7,7 @@ class Panel extends Component{
     constructor(props){
         super(props)
         this.state = {
-            page: 1, rowsPerPage: 6, numPgs: 0,
+            page: 1, rowsPerPage: 3, numPgs: 0,
             nextPage:false , lastPage: false
         }
         // false deactivates the corresponding button, true does other wise
@@ -38,15 +38,20 @@ class Panel extends Component{
     lastPage(){
         const { page, numPgs, nextPage, lastPage } = this.state
         // lets say im on page 3
-        if( page > 1 ){
-            this.setState({ page: this.state.page - 1, lastPage: true })
+        if( page > 1 && ( page - 1 == 1 ) ){
+            this.setState({ page: this.state.page - 1, lastPage: false, nextPage: true  })
+        }else if( page > 1 && ( page - 1 > 1 ) ){
+            this.setState({ page: this.state.page - 1, lastPage: true, nextPage: true  })
         }
         return
     }
     nextPage(){
         const { page, numPgs, nextPage, lastPage } = this.state
-        if( page < lastPage ){
-            this.setState({ page: this.state.page + 1, nextPage: true })
+
+        if( ( page < numPgs ) && ( page + 1 != numPgs ) ){
+            this.setState({ page: this.state.page + 1, nextPage: true, lastPage: true })
+        }else if( ( page < numPgs ) && ( page + 1 == numPgs ) ){
+            this.setState({ page: this.state.page + 1, nextPage: false, lastPage: true })
         }
         return
     }
@@ -81,8 +86,8 @@ class Panel extends Component{
                         style={ this.state.lastPage ? {} : style.cursor } 
                         onClick={ this.lastPage.bind(this) } 
                     > { '< Last' } </button>
-                    <button className="btn btn-info" 
-                        style={ this.state.nextPage ? {} : style.cursorNext }
+                    <button className="btn btn-info"
+                        style={ this.state.nextPage ? {float: 'right'} : style.cursorNext }
                         onClick={ this.nextPage.bind(this) }
                     > { 'Next >' } </button>
                 </div>

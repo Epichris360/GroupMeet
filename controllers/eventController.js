@@ -160,9 +160,13 @@ const deleted = (req, res) => {
         return
     })
 }
-
+ 
 const search = (req, res) => {
-    res.render('event/search', {bgImg: constants.genericBg[4].imgUrl })
+    if(  req.vertexSession == null || req.vertexSession.user == null ){ 
+        req.vertexSession  = functions.blankVertexSession() 
+    }
+    const vertexSession = req.vertexSession
+    res.render('event/search', {bgImg: constants.genericBg[4].imgUrl, vertexSession })
     return
 }
 
@@ -191,7 +195,10 @@ const getEvents = (req, res) => {
         return
     })
     .catch(err => {
-
+        res.status(500).json({
+            err: err.message
+        })
+        return
     })
 }
 
